@@ -76,9 +76,9 @@ const Footer = () => {
                       <a href="tel:(+00)67834598">(+00) 678 345 98</a>
                     </span>
                   </li>
-                  <li>
+                  {/* <li>
                     Faq: <span>+(456) 332-897-234</span>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </div>

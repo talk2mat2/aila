@@ -103,11 +103,12 @@ const DashBoard = () => {
   console.log(userdata.referrals);
 
   const MapReferrs = () => {
-    return (
-      userdata.referrals.length > 1 &&
+    return userdata.referrals.length > 1 ? (
       userdata.referrals.map((data) => {
         return <ReferralCards color="#4c8bf5" data={data} />;
       })
+    ) : (
+      <MediumText>No Referrals yet..</MediumText>
     );
   };
 

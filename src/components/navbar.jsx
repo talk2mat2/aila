@@ -51,46 +51,17 @@ const NavBar = () => {
                       About Us
                     </Link>
                   </li>
-                  <li className="nav-item">
-                    <a href="#" className="nav-link">
-                      Pages{" "}
-                      <i
-                        className="fas fa-caret-down"
-                        style={{ paddingLeft: "5px" }}
-                      ></i>
-                    </a>
-                    <ul className="dropdown-menu">
-                      <li className="nav-item">
-                        <Link className="nav-link" to="FAQS">
-                          {" "}
-                          FAQ's
-                        </Link>
-                        {/* <a
-                          href="Aila - Online Banking & Payment Processing HTML Template.html"
-                          className="nav-link"
-                        >
-                        
-                        </a> */}
-                      </li>
 
-                      {/* <li className="nav-item">
-                        <Link to="terms" className="nav-link">
-                          Terms & Conditions
-                        </Link>
-                      </li> */}
-                      {/* <li className="nav-item">
-                        <Link to="/PrivacyPolicies" className="nav-link">
-                          Privacy Policy
-                        </Link>
-                      </li> */}
-                    </ul>
-                  </li>
                   <li className="nav-item">
                     <Link className="nav-link" to="/Features">
                       Features
                     </Link>
                   </li>
-
+                  <li className="nav-item">
+                    <Link className="nav-item" to="FAQS">
+                      FAQ's
+                    </Link>
+                  </li>
                   <li className="nav-item">
                     <Link to="/ContactUs" className="nav-link ">
                       Contact Us

@@ -227,9 +227,14 @@ const DashBoard = () => {
       setUpdateLoading(true);
 
       axios
-        .post("http://127.0.0.1:8080/users/UpdateMyAcctNumber", values, {
-          headers: { authorization: token },
-        })
+        .post(
+          // "http://127.0.0.1:8080/users/UpdateMyAcctNumber",
+          "https://tranquil-headland-58367.herokuapp.com/users/UpdateMyAcctNumber",
+          values,
+          {
+            headers: { authorization: token },
+          }
+        )
         .then((res) => {
           console.log(res.data);
           dispatch(SYNCUSERDATA(res.data.userdata));

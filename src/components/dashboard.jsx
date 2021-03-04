@@ -71,12 +71,12 @@ const BigText = styled.p`
 `;
 const MediumText = styled.p`
   color: grey;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
 `;
 const MediumTextLignt = styled.p`
   color: grey;
-  font-size: 15px;
+  font-size: 14px;
 `;
 const SmallText = styled.p`
   color: #f0fff0;

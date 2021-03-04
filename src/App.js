@@ -45,32 +45,37 @@ function App() {
           <Route exact path="/terms">
             <TermsAndCondition />
           </Route>
-          <Route path="/users">
+          <Route exact path="/users">
             <Authentication />
           </Route>
-          <Route path="/MyDashBoard">
-            <DashBoard />
-          </Route>
-          <Route path="/ContactUs">
+          {CurrentUser && (
+            <Route exact path="/MyDashBoard">
+              <DashBoard />
+            </Route>
+          )}
+          <Route exact path="/ContactUs">
             <Contactus />
           </Route>
-          <Route path="/PrivacyPolicies">
+          <Route exact path="/PrivacyPolicies">
             <Privacypolicy />
           </Route>
-          <Route path="/forgotPassword">
+          <Route exact path="/forgotPassword">
             <Forgetpassword />
           </Route>
-          <Route path="/AboutUs">
+          <Route exact path="/AboutUs">
             <Aboutus />
           </Route>
-          <Route path="/FAQS">
+          <Route exact path="/FAQS">
             <Faqs />
           </Route>
-          <Route path="/Features">
+          <Route exact path="/Features">
             <Features />
           </Route>
           <Route path="/logout">
             <LogOut />
+          </Route>
+          <Route>
+            <Page404 />
           </Route>
           {/* <Authentication /> */}
           {/* <DashBoard/> */}

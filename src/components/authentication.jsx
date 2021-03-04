@@ -8,6 +8,12 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { useFormik } from "formik";
 import { LOGINSUCCESS } from "../redux/action";
 import * as Yup from "yup";
+// import NavBar from "./navbar";
+import styled from "styled-components";
+
+const Margin = styled.div`
+  height: 80px;
+`;
 
 const axios = require("axios").default;
 
@@ -30,7 +36,7 @@ const Authentication = () => {
   useEffect(() => {
     if (CurrentUser && CurrentUser.token) {
       history.push("MyDashBoard");
-      console.log(CurrentUser);
+      // console.log(CurrentUser);
     }
   });
   const handleSelect = () => {
@@ -64,6 +70,7 @@ const Authentication = () => {
       await axios
         .post(
           "https://tranquil-headland-58367.herokuapp.com/users/register",
+          // "http://127.0.0.1:8080/users/register",
           values
         )
         .then(function (response) {
@@ -98,7 +105,9 @@ const Authentication = () => {
       setLoadinglogin(true);
       await axios
         .post(
+          // "http://127.0.0.1:8080/users/login",
           "https://tranquil-headland-58367.herokuapp.com/users/login",
+
           values
         )
         .then(function (response) {
@@ -122,6 +131,7 @@ const Authentication = () => {
 
   return (
     <div>
+      <Margin />
       <div
         className="authentication-section"
         style={{

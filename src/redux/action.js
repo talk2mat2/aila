@@ -12,3 +12,10 @@ export const LOGINOUTUSER = () => {
     type: acttiontypes.LOGINOUTUSER,
   };
 };
+export const SYNCUSERDATA = (userData) => {
+  console.log("called me");
+  return {
+    type: acttiontypes.SYNCUSERDATA,
+    payload: userData,
+  };
+};

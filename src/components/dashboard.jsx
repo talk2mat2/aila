@@ -10,7 +10,7 @@ import Modal from "@material-ui/core/Modal";
 import axios from "axios";
 import { Formik, useFormik } from "formik";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { SYNCUSERDATA } from "../redux/action";
+import { SYNCUSERDATA, LOGINOUTUSER } from "../redux/action";
 
 import TextField from "@material-ui/core/TextField";
 const Main = styled.div`
@@ -84,6 +84,12 @@ const SmallText = styled.p`
   font-weight: 700;
   font-family: boxicons !important;
 `;
+const SmallText2 = styled.p`
+  color: #f0fff0;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: boxicons !important;
+`;
 const Margin = styled.div`
   height: 100px;
 `;
@@ -110,7 +116,9 @@ const CardsContainer = styled.div`
   border-radius: 10px;
   margin: 5px;
   text-align: center;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding: 3px;
   overflow-wrap: break-word;
   word-wrap: break-word;
@@ -121,33 +129,78 @@ const ReferralCards = (props) => {
   const { Email, fullName } = props.data;
   return (
     <CardsContainer color={props.color}>
-      <SmallText>Name: {fullName}</SmallText>
-      <SmallText>Email: {Email}</SmallText>
+      <div>
+        <SmallText2>Name: {fullName}</SmallText2>
+        <SmallText2>Email: {Email}</SmallText2>
+      </div>
     </CardsContainer>
   );
 };
-const DownLinerCards = (props) => {
+const DownlinersCards = (props) => {
+  const { Email, fullName, paymentStatus, _id } = props.data;
+
   return (
-    <CardsContainer color={props.color}>
-      <SmallText>Name: sarrah mohammed</SmallText>
-      <SmallText>Email: microsoft90@yahoo.com</SmallText>
-      <SmallText>Introduced by: sarray mohhamed</SmallText>
+    <CardsContainer color={paymentStatus ? "#25D366" : props.color}>
+      <div>
+        <SmallText2>Name: {fullName}</SmallText2>
+        <SmallText2>Email: {Email}</SmallText2>
+      </div>
+
+      <Button
+        disabled={paymentStatus}
+        color="primary"
+        style={{ height: "18px" }}
+        variant="contained"
+        onClick={() => {
+          props.handleReceived(_id);
+        }}
+      >
+        <p style={{ fontSize: "10px", color: "white" }}>
+          {paymentStatus ? "Gift Received" : "confirm received"}
+        </p>
+      </Button>
     </CardsContainer>
   );
 };
+// const DownLinerCards = (props) => {
+//   return (
+//     <CardsContainer color={props.color}>
+//       <SmallText>Name: sarrah mohammed</SmallText>
+//       <SmallText>Email: microsoft90@yahoo.com</SmallText>
+//       <SmallText>Introduced by: sarray mohhamed</SmallText>
+//     </CardsContainer>
+//   );
+// };
 
 const DashBoard = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
   const token = currentUser && currentUser.token;
-  const userdata = currentUser && currentUser.token && currentUser.userdata;
+  const userdata =
+    (currentUser && currentUser.token && currentUser.userdata) || {};
   const colors = ["tomato", "#4c8bf5", "#5851db", "orange"];
   const dispatch = useDispatch();
   //   console.log(userdata.referrals);
   const [UpdateLoading, setUpdateLoading] = useState(false);
   useEffect(() => {
+    typeof userdat === "undefined" && dispatch(LOGINOUTUSER());
+  });
+  const handleReceived = (payerId) => {
+    axios
+      .post(
+        // "http://127.0.0.1:8080/users/ConfirmPaymentReceived",
+        "https://tranquil-headland-58367.herokuapp.com/users/ConfirmPaymentReceived",
+
+        { headers: { authorization: token } }
+      )
+      .then((res) => {
+        dispatch(SYNCUSERDATA(res.data.userdata));
+      });
+  };
+
+  useEffect(() => {
     axios
       .get(
-        //   "http://127.0.0.1:8080/users/updateClient",
+        // "http://127.0.0.1:8080/users/updateClient",
         "https://tranquil-headland-58367.herokuapp.com/users/updateClient",
         {
           headers: { authorization: token },
@@ -172,7 +225,13 @@ const DashBoard = () => {
   const MapDownLiners = () => {
     return userdata.downLiners.length > 0 ? (
       userdata.downLiners.map((data) => {
-        return <ReferralCards color="tomato" data={data} />;
+        return (
+          <DownlinersCards
+            handleReceived={handleReceived}
+            color="tomato"
+            data={data}
+          />
+        );
       })
     ) : (
       <MediumText>Not yet A gifted..</MediumText>
@@ -205,11 +264,18 @@ const DashBoard = () => {
   }
 
   const [open, setOpen] = useState(false);
+  const [openUpload, setOpenUpload] = useState(false);
   const [modalStyle] = React.useState(getModalStyle);
   const handleOpen = () => {
     setOpen(true);
   };
+  const handleOpenUpload = () => {
+    setOpenUpload(true);
+  };
 
+  const handleCloseUpload = () => {
+    setOpenUpload(false);
+  };
   const handleClose = () => {
     setOpen(false);
   };
@@ -228,7 +294,7 @@ const DashBoard = () => {
 
       axios
         .post(
-          // "http://127.0.0.1:8080/users/UpdateMyAcctNumber",
+          //   "http://127.0.0.1:8080/users/UpdateMyAcctNumber",
           "https://tranquil-headland-58367.herokuapp.com/users/UpdateMyAcctNumber",
           values,
           {
@@ -258,7 +324,7 @@ const DashBoard = () => {
           bank_Name
           size={30}
           name="bank_Name"
-          label="Account Name"
+          label="Bank Name"
           onChange={formik.handleChange}
           onSubmit={formik.handleSubmit}
         />
@@ -297,6 +363,37 @@ const DashBoard = () => {
       </Button>
     </div>
   );
+  const body2 = (
+    <div style={{ ...modalStyle, ...ModalStyle }}>
+      <MediumTextLignt>Upload Payment Evidence </MediumTextLignt>
+      <div style={{ width: "60%", textAlign: "center" }}>
+        <Button variant="contained" component="label">
+          Upload File
+          <input type="file" hidden />
+        </Button>
+      </div>
+
+      <Button
+        color="primary"
+        style={{ height: "18px" }}
+        variant="contained"
+        onClick={formik.handleSubmit}
+      >
+        {UpdateLoading ? (
+          <CircularProgress
+            size={10}
+            color="primary"
+            style={{ color: "white" }}
+          />
+        ) : (
+          <small style={{ fontSize: 9 }}>
+            {" "}
+            upload and request for confirmation
+          </small>
+        )}
+      </Button>
+    </div>
+  );
 
   return (
     <div>
@@ -312,6 +409,14 @@ const DashBoard = () => {
           >
             {body}
           </Modal>
+          <Modal
+            open={openUpload}
+            onClose={handleCloseUpload}
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+          >
+            {body2}
+          </Modal>
           <div>
             <MediumTextLignt>
               {userdata.fullName} - ({userdata.Email})
@@ -321,7 +426,7 @@ const DashBoard = () => {
             </MediumTextLignt>
             <MediumTextLignt>
               My Membership Status-{" "}
-              {userdata.downLiners.length > 0
+              {userdata.downLiners && userdata.downLiners.length > 0
                 ? "water position (Gifted)"
                 : userdata.referrals.length && userdata.downLiners.length > 1
                 ? "wind position"
@@ -339,6 +444,9 @@ userdata.downLiners */}
         </DashboardHeader>
         <GiftHeader>
           <div>
+            <MediumTextLignt>
+              <b>My Details</b>
+            </MediumTextLignt>
             <MediumTextLignt>Bank Name - {userdata.bank_Name}</MediumTextLignt>
             <MediumTextLignt>
               My Accouunt Number - {userdata.bank_Acct_Number}
@@ -353,10 +461,13 @@ userdata.downLiners */}
               variant="contained"
               onClick={handleOpen}
             >
-              <small> update</small>
+              <small style={{ fontSize: 10 }}> update</small>
             </Button>
           </div>
           <div>
+            <MediumTextLignt>
+              <b> Send Gift</b>
+            </MediumTextLignt>
             <MediumTextLignt>
               Gifted member to be paid by me --{" "}
               <b>{userdata.pay_to_BankUserName}</b>
@@ -372,6 +483,14 @@ userdata.downLiners */}
               {/* <CloseIcon fontSize="small" style={{ color: "red" }} /> */}
               {/* <CheckIcon fontSize="small" style={{ color: "green" }} /> */}
             </MediumTextLignt>
+            <Button
+              color="primary"
+              style={{ height: "18px" }}
+              variant="contained"
+              onClick={handleOpenUpload}
+            >
+              <small style={{ fontSize: 10 }}> Upload Payment Evidence</small>
+            </Button>
           </div>
         </GiftHeader>
         <RefferHeader>
@@ -384,7 +503,9 @@ userdata.downLiners */}
           {MapReferrs()}
         </ReferralContainer>
         <RefferHeader>
-          <BigText>level Two ({userdata.downLiners.length})</BigText>
+          <BigText>
+            level Two (Gift Givers) ({userdata.downLiners.length})
+          </BigText>
         </RefferHeader>
         <ReferralContainer>{MapDownLiners()}</ReferralContainer>
       </Main>

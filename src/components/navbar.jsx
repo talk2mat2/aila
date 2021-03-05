@@ -12,7 +12,8 @@ const NavBar = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
   const history = useHistory();
   const dispatch = useDispatch();
-  const userdata = currentUser && currentUser.token && currentUser.userdata;
+  const userdata =
+    (currentUser && currentUser.token && currentUser.userdata) || {};
 
   const handleLogout = () => {
     dispatch(LOGINOUTUSER());
@@ -132,7 +133,7 @@ const NavBar = () => {
                   </Link>
                   <small>
                     Welcome <br />
-                    {userdata.fullName.length > 14
+                    {userdata.fullName && userdata.fullName.length > 14
                       ? userdata.fullName.slice(0, 14) + "..."
                       : userdata.fullName}
                   </small>

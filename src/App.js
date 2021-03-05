@@ -34,6 +34,28 @@ function App() {
     return <></>;
   };
   const CurrentUser = useSelector((state) => state.user.currentUser);
+  const userdata = CurrentUser && CurrentUser.userdata;
+  useEffect(() => {
+    CurrentUser && SelfDestructT(userdata);
+  }, [userdata]);
+
+  const SelfDestructT = (user) => {
+    console.log(user);
+    if (user && user.downLiners.length > 3) {
+      let completed = 0;
+      user.downLiners.forEach((givers) => {
+        if (givers.paymentStatus === true) {
+          completed += 1;
+          console.log(givers);
+        }
+      });
+      console.log(completed);
+      if (completed === 4) {
+        dispatch(LOGINOUTUSER());
+      }
+    }
+  };
+
   return (
     <Router>
       <React.Fragment>

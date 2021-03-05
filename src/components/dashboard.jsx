@@ -10,7 +10,7 @@ import Modal from "@material-ui/core/Modal";
 import axios from "axios";
 import { Formik, useFormik } from "formik";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { SYNCUSERDATA, LOGINOUTUSER } from "../redux/action";
+import { SYNCUSERDATA } from "../redux/action";
 
 import TextField from "@material-ui/core/TextField";
 const Main = styled.div`
@@ -179,15 +179,15 @@ const DashBoard = () => {
     (currentUser && currentUser.token && currentUser.userdata) || {};
   const colors = ["tomato", "#4c8bf5", "#5851db", "orange"];
   const dispatch = useDispatch();
+
   //   console.log(userdata.referrals);
   const [UpdateLoading, setUpdateLoading] = useState(false);
-
+  const [ImageState, setImageState] = useState({ file: null });
   const handleReceived = (payerId) => {
     axios
       .post(
-        // "http://127.0.0.1:8080/users/ConfirmPaymentReceived",
-        "https://tranquil-headland-58367.herokuapp.com/users/ConfirmPaymentReceived",
-
+        "http://127.0.0.1:8080/users/ConfirmPaymentReceived",
+        { payerId: payerId },
         { headers: { authorization: token } }
       )
       .then((res) => {
@@ -195,11 +195,17 @@ const DashBoard = () => {
       });
   };
 
+  function handleChange(event) {
+    setImageState({
+      file: URL.createObjectURL(event.target.files[0]),
+    });
+  }
+
   useEffect(() => {
     axios
       .get(
-        // "http://127.0.0.1:8080/users/updateClient",
-        "https://tranquil-headland-58367.herokuapp.com/users/updateClient",
+        "http://127.0.0.1:8080/users/updateClient",
+        // "https://tranquil-headland-58367.herokuapp.com/users/updateClient",
         {
           headers: { authorization: token },
         }
@@ -292,8 +298,8 @@ const DashBoard = () => {
 
       axios
         .post(
-          //   "http://127.0.0.1:8080/users/UpdateMyAcctNumber",
-          "https://tranquil-headland-58367.herokuapp.com/users/UpdateMyAcctNumber",
+          "http://127.0.0.1:8080/users/UpdateMyAcctNumber",
+          //   "https://tranquil-headland-58367.herokuapp.com/users/UpdateMyAcctNumber",
           values,
           {
             headers: { authorization: token },
@@ -365,9 +371,16 @@ const DashBoard = () => {
     <div style={{ ...modalStyle, ...ModalStyle }}>
       <MediumTextLignt>Upload Payment Evidence </MediumTextLignt>
       <div style={{ width: "60%", textAlign: "center" }}>
+        {ImageState.file && (
+          <img
+            src={ImageState.file}
+            alt="preview"
+            style={{ maxHeight: "200px", maxWidth: "160px" }}
+          />
+        )}
         <Button variant="contained" component="label">
-          Upload File
-          <input type="file" hidden />
+          Select
+          <input type="file" hidden onChange={handleChange} />
         </Button>
       </div>
 

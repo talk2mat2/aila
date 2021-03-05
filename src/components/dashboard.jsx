@@ -181,9 +181,7 @@ const DashBoard = () => {
   const dispatch = useDispatch();
   //   console.log(userdata.referrals);
   const [UpdateLoading, setUpdateLoading] = useState(false);
-  useEffect(() => {
-    typeof userdat === "undefined" && dispatch(LOGINOUTUSER());
-  });
+
   const handleReceived = (payerId) => {
     axios
       .post(

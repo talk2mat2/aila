@@ -69,8 +69,8 @@ const Authentication = () => {
       setLoadingsignup(true);
       await axios
         .post(
-          // "https://tranquil-headland-58367.herokuapp.com/users/register",
-          "http://127.0.0.1:8080/users/register",
+          "https://tranquil-headland-58367.herokuapp.com/users/register",
+          // "http://127.0.0.1:8080/users/register",
           values
         )
         .then(function (response) {
@@ -105,8 +105,8 @@ const Authentication = () => {
       setLoadinglogin(true);
       await axios
         .post(
-          "http://127.0.0.1:8080/users/login",
-          // "https://tranquil-headland-58367.herokuapp.com/users/login",
+          // "http://127.0.0.1:8080/users/login",
+          "https://tranquil-headland-58367.herokuapp.com/users/login",
 
           values
         )

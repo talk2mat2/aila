@@ -15,6 +15,8 @@ import { SYNCUSERDATA } from "../redux/action";
 import TextField from "@material-ui/core/TextField";
 
 const ProxyUrl = "https://tranquil-headland-58367.herokuapp.com";
+
+// const ProxyUrl = "http://localhost:8080";
 const Main = styled.div`
   min-height: 95vh;
   background-color: #f1f0f0;
@@ -204,7 +206,7 @@ const DashBoard = () => {
   const handleReceived = (payerId) => {
     axios
       .post(
-        "/users/ConfirmPaymentReceived",
+        `${ProxyUrl}/users/ConfirmPaymentReceived`,
         { payerId: payerId },
         { headers: { authorization: token } }
       )
@@ -551,7 +553,8 @@ userdata.downLiners */}
             </MediumTextLignt>
             <MediumTextLignt>
               <small style={{ color: "tomato", fontSize: "12px" }}>
-                **ensure bank account is correct before reffering a friend
+                **ensure bank account is correct before referring a friend or
+                family member
               </small>
             </MediumTextLignt>
 

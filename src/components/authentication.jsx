@@ -266,10 +266,10 @@ const Authentication = () => {
                         </div>
                       </form>
                     </div>
-                    <div className="authentication-divider mt-20">
+                    {/* <div className="authentication-divider mt-20">
                       <span>Or Login With</span>
-                    </div>
-                    <div className="authentication-social-access mt-10">
+                    </div> */}
+                    {/* <div className="authentication-social-access mt-10">
                       <div className="authentication-social-item social-btn social-btn-fb mt-10">
                         <a href="authentication.html#">Facebook</a>
                       </div>
@@ -279,7 +279,7 @@ const Authentication = () => {
                       <div className="authentication-social-item social-btn social-btn-ld mt-10">
                         <a href="authentication.html#">Linkedin</a>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
 
                   <div
@@ -419,7 +419,7 @@ const Authentication = () => {
                         </div>
                       </form>
                     </div>
-                    <div className="authentication-divider mt-60">
+                    {/* <div className="authentication-divider mt-60">
                       <span>Or Sign Up With</span>
                     </div>
                     <div className="authentication-social-access mt-10">
@@ -432,7 +432,7 @@ const Authentication = () => {
                       <div className="authentication-social-item social-btn social-btn-ld mt-10">
                         <a href="authentication.html#">Linkedin</a>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>

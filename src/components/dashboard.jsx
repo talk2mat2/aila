@@ -43,7 +43,7 @@ const RefferHeader = styled.div`
   align-items: center;
 `;
 const GiftHeader = styled.div`
-  min-height: 80px;
+  min-height: 90px;
   margin-top: 10px;
   width: 98%;
   background-color: #ffff;
@@ -51,7 +51,7 @@ const GiftHeader = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 `;
 const ReferralContainer = styled.div`
   display: flex;
@@ -137,7 +137,12 @@ const ReferralCards = (props) => {
   );
 };
 const DownlinersCards = (props) => {
-  const { Email, fullName, paymentStatus, _id } = props.data;
+  const { Email, fullName, paymentStatus, _id, evidenImageUri } = props.data;
+
+  const openInNewTab = (url) => {
+    const newWindow = window.open(url, "_blank", "noopener,noreferrer");
+    if (newWindow) newWindow.opener = null;
+  };
 
   return (
     <CardsContainer color={paymentStatus ? "#25D366" : props.color}>
@@ -145,6 +150,16 @@ const DownlinersCards = (props) => {
         <SmallText2>Name: {fullName}</SmallText2>
         <SmallText2>Email: {Email}</SmallText2>
       </div>
+      {evidenImageUri ? (
+        <img
+          onClick={() => {
+            openInNewTab(evidenImageUri);
+          }}
+          style={{ alignSelf: "center", width: "90px", height: "80px" }}
+          src={evidenImageUri}
+          alt="evidence img"
+        />
+      ) : null}
 
       <Button
         disabled={paymentStatus}
@@ -182,11 +197,12 @@ const DashBoard = () => {
 
   //   console.log(userdata.referrals);
   const [UpdateLoading, setUpdateLoading] = useState(false);
-  const [ImageState, setImageState] = useState({ file: null });
+  const [ImageState, setImageState] = useState({ file: null, Uri: null });
+  const [uploadingImg, setUploadingImg] = useState(false);
   const handleReceived = (payerId) => {
     axios
       .post(
-        "http://127.0.0.1:8080/users/ConfirmPaymentReceived",
+        "/users/ConfirmPaymentReceived",
         { payerId: payerId },
         { headers: { authorization: token } }
       )
@@ -198,13 +214,14 @@ const DashBoard = () => {
   function handleChange(event) {
     setImageState({
       file: URL.createObjectURL(event.target.files[0]),
+      Uri: event.target.files[0],
     });
   }
 
   useEffect(() => {
     axios
       .get(
-        "http://127.0.0.1:8080/users/updateClient",
+        "/users/updateClient",
         // "https://tranquil-headland-58367.herokuapp.com/users/updateClient",
         {
           headers: { authorization: token },
@@ -298,7 +315,7 @@ const DashBoard = () => {
 
       axios
         .post(
-          "http://127.0.0.1:8080/users/UpdateMyAcctNumber",
+          "/users/UpdateMyAcctNumber",
           //   "https://tranquil-headland-58367.herokuapp.com/users/UpdateMyAcctNumber",
           values,
           {
@@ -318,6 +335,60 @@ const DashBoard = () => {
         });
     },
   });
+
+  const handleUploadImg = async () => {
+    const image = ImageState.Uri;
+    const pay_to__id = userdata.pay_to__id;
+
+    if (!image) {
+      alert("no image");
+      return;
+    } else {
+      setUploadingImg(true);
+      //   console.log("image seen", image);
+      var formData = new FormData();
+      formData.append(
+        "file",
+        //  {
+        //   uri: image,
+        //   type: "image/jpeg",
+        //   name: "image.jpg",
+        // }
+        image
+      );
+      formData.append("pay_to__id", pay_to__id);
+      axios({
+        url: "/users/UploadImg",
+        method: "POST",
+        data: formData,
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: token,
+        },
+      })
+        .then((res) => {
+          console.log(res.data);
+          setUploadingImg(false);
+          alert(res.data.response);
+          //   dispatch(upDateUserSUcess(res.data));
+        })
+        .catch((error) => {
+          if (error.response) {
+            setUploadingImg(false);
+            // dispatch(upDateUserFailure(error.data));
+            // console.log(error.response.data);
+            alert(error.response.data.message);
+            console.log(error.response.data.message);
+          } else {
+            // upDateUserFailure({ message: "error" });
+            // console.log(error);
+            console.log(error);
+            setUploadingImg(false);
+          }
+        });
+    }
+  };
+
   const body = (
     <div style={{ ...modalStyle, ...ModalStyle }}>
       <MediumTextLignt>Update Bank Account </MediumTextLignt>
@@ -370,25 +441,36 @@ const DashBoard = () => {
   const body2 = (
     <div style={{ ...modalStyle, ...ModalStyle }}>
       <MediumTextLignt>Upload Payment Evidence </MediumTextLignt>
-      <div style={{ width: "60%", textAlign: "center" }}>
-        {ImageState.file && (
-          <img
-            src={ImageState.file}
-            alt="preview"
-            style={{ maxHeight: "200px", maxWidth: "160px" }}
+      {uploadingImg ? (
+        <>
+          <CircularProgress
+            size={50}
+            color="primary"
+            style={{ color: "red" }}
           />
-        )}
-        <Button variant="contained" component="label">
-          Select
-          <input type="file" hidden onChange={handleChange} />
-        </Button>
-      </div>
+          <small>uploading...</small>
+        </>
+      ) : (
+        <div style={{ width: "60%", textAlign: "center" }}>
+          {ImageState.file && (
+            <img
+              src={ImageState.file}
+              alt="preview"
+              style={{ maxHeight: "200px", maxWidth: "160px" }}
+            />
+          )}
+          <Button variant="contained" component="label">
+            Select
+            <input type="file" hidden onChange={handleChange} />
+          </Button>
+        </div>
+      )}
 
       <Button
         color="primary"
         style={{ height: "18px" }}
         variant="contained"
-        onClick={formik.handleSubmit}
+        onClick={handleUploadImg}
       >
         {UpdateLoading ? (
           <CircularProgress
@@ -465,6 +547,11 @@ userdata.downLiners */}
             <MediumTextLignt>
               Account Name - {userdata.fullName}
             </MediumTextLignt>
+            <MediumTextLignt>
+              <small style={{ color: "tomato", fontSize: "12px" }}>
+                **ensure bank account is correct before reffering a friend
+              </small>
+            </MediumTextLignt>
 
             <Button
               color="primary"
@@ -490,7 +577,12 @@ userdata.downLiners */}
               Account to send gift to- <b>{userdata.pay_to_BankNumber}</b>
             </MediumTextLignt>
             <MediumTextLignt>
-              Payment Status--<b>Not Confirmed</b>
+              Payment Status--
+              {userdata.pay_to_BankNumber && userdata.paymentConfirmed ? (
+                <b style={{ color: "green" }}>Confirmed</b>
+              ) : (
+                <b style={{ color: "red" }}>pending</b>
+              )}
               {/* <CloseIcon fontSize="small" style={{ color: "red" }} /> */}
               {/* <CheckIcon fontSize="small" style={{ color: "green" }} /> */}
             </MediumTextLignt>
@@ -499,6 +591,9 @@ userdata.downLiners */}
               style={{ height: "18px" }}
               variant="contained"
               onClick={handleOpenUpload}
+              disabled={
+                !userdata.pay_to_BankNumber || userdata.paymentConfirmed
+              }
             >
               <small style={{ fontSize: 10 }}> Upload Payment Evidence</small>
             </Button>

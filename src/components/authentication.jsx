@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useFormik } from "formik";
 import { LOGINSUCCESS } from "../redux/action";
+
 import * as Yup from "yup";
 // import NavBar from "./navbar";
 import styled from "styled-components";
@@ -14,7 +15,7 @@ import styled from "styled-components";
 const Margin = styled.div`
   height: 80px;
 `;
-
+const ProxyUrl = "https://tranquil-headland-58367.herokuapp.com";
 const axios = require("axios").default;
 
 const Authentication = () => {
@@ -68,11 +69,7 @@ const Authentication = () => {
       // }
       setLoadingsignup(true);
       await axios
-        .post(
-          // "https://tranquil-headland-58367.herokuapp.com/users/register",
-          "/users/register",
-          values
-        )
+        .post(`${ProxyUrl}/users/register`, values)
         .then(function (response) {
           console.log(response);
           setLoadingsignup(false);
@@ -105,7 +102,7 @@ const Authentication = () => {
       setLoadinglogin(true);
       await axios
         .post(
-          "/users/login",
+          `${ProxyUrl}/users/login`,
           // "https://tranquil-headland-58367.herokuapp.com/users/login",
 
           values

@@ -13,6 +13,8 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { SYNCUSERDATA } from "../redux/action";
 
 import TextField from "@material-ui/core/TextField";
+
+const ProxyUrl = "https://tranquil-headland-58367.herokuapp.com";
 const Main = styled.div`
   min-height: 95vh;
   background-color: #f1f0f0;
@@ -221,7 +223,7 @@ const DashBoard = () => {
   useEffect(() => {
     axios
       .get(
-        "/users/updateClient",
+        `${ProxyUrl}/users/updateClient`,
         // "https://tranquil-headland-58367.herokuapp.com/users/updateClient",
         {
           headers: { authorization: token },
@@ -315,7 +317,7 @@ const DashBoard = () => {
 
       axios
         .post(
-          "/users/UpdateMyAcctNumber",
+          ` ${ProxyUrl}/users/UpdateMyAcctNumber`,
           //   "https://tranquil-headland-58367.herokuapp.com/users/UpdateMyAcctNumber",
           values,
           {
@@ -358,7 +360,7 @@ const DashBoard = () => {
       );
       formData.append("pay_to__id", pay_to__id);
       axios({
-        url: "/users/UploadImg",
+        url: `${ProxyUrl}/users/UploadImg`,
         method: "POST",
         data: formData,
         headers: {

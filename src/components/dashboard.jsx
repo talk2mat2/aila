@@ -15,7 +15,6 @@ import { SYNCUSERDATA } from "../redux/action";
 import TextField from "@material-ui/core/TextField";
 
 const ProxyUrl = "https://tranquil-headland-58367.herokuapp.com";
-
 // const ProxyUrl = "http://localhost:8080";
 const Main = styled.div`
   min-height: 95vh;

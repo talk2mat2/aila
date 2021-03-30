@@ -63,23 +63,6 @@ const NavBar = () => {
                       FAQ's
                     </Link>
                   </li>
-                  <li className="nav-item">
-                    <Link to="/ContactUs" className="nav-link ">
-                      Contact Us
-                    </Link>
-                  </li>
-
-                  {currentUser ? (
-                    <>
-                      {" "}
-                      <li className="nav-item User-UserColapsible">
-                        <Link to="/MyDashBoard" className="nav-link ">
-                          My Profile
-                        </Link>
-                      </li>
-                      <li className="nav-item User-UserColapsible"></li>
-                    </>
-                  ) : null}
                   {currentUser ? (
                     <li className="nav-item User-UserColapsible">
                       <Link to="/logout">
@@ -93,6 +76,23 @@ const NavBar = () => {
                       </Link>
                     </li>
                   )}
+                 
+                  {currentUser ? (
+                    <>
+                      {" "}
+                      <li className="nav-item User-UserColapsible">
+                        <Link to="/MyDashBoard" className="nav-link ">
+                          My Profile
+                        </Link>
+                      </li>
+                      <li className="nav-item User-UserColapsible"></li>
+                    </>
+                  ) : null}
+                <li className="nav-item">
+                    <Link to="/ContactUs" className="nav-link ">
+                      Contact Us
+                    </Link>
+                  </li>
                 </ul>
               </div>
 

@@ -14,7 +14,8 @@ import { SYNCUSERDATA } from "../redux/action";
 
 import TextField from "@material-ui/core/TextField";
 
-const ProxyUrl = "https://tranquil-headland-58367.herokuapp.com";
+// const ProxyUrl = "https://tranquil-headland-58367.herokuapp.com";
+const ProxyUrl = process.env.REACT_APP_API_URL
 // const ProxyUrl = "http://localhost:8080";
 const Main = styled.div`
   min-height: 95vh;
@@ -25,7 +26,7 @@ const Main = styled.div`
   padding-bottom: 30px;
 `;
 const DashboardHeader = styled.div`
-  height: 100px;
+  min-height: 100px;
   width: 98%;
   background-color: #ffff;
   padding: 10px;
@@ -129,18 +130,19 @@ const CardsContainer = styled.div`
   padding: 4px;
 `;
 const ReferralCards = (props) => {
-  const { Email, fullName } = props.data;
+  const { Email, fullName, mobile } = props.data;
   return (
     <CardsContainer color={props.color}>
       <div>
         <SmallText2>Name: {fullName}</SmallText2>
         <SmallText2>Email: {Email}</SmallText2>
+        <SmallText2>phone: {mobile}</SmallText2>
       </div>
     </CardsContainer>
   );
 };
 const DownlinersCards = (props) => {
-  const { Email, fullName, paymentStatus, _id, evidenImageUri } = props.data;
+  const { Email, fullName, paymentStatus, _id, evidenImageUri, mobile ,introducedBy} = props.data;
 
   const openInNewTab = (url) => {
     const newWindow = window.open(url, "_blank", "noopener,noreferrer");
@@ -152,6 +154,8 @@ const DownlinersCards = (props) => {
       <div>
         <SmallText2>Name: {fullName}</SmallText2>
         <SmallText2>Email: {Email}</SmallText2>
+        <SmallText2>Phone: {mobile}</SmallText2>
+        <SmallText2>Introduced by: {introducedBy}</SmallText2>
       </div>
       {evidenImageUri ? (
         <img
@@ -277,8 +281,8 @@ const DashBoard = () => {
   }
 
   function getModalStyle() {
-    const top = 50 + rand();
-    const left = 50 + rand();
+    const top = 50 
+    const left = 50 
 
     return {
       top: `${top}%`,
@@ -423,7 +427,7 @@ const DashBoard = () => {
         />
       </div>
 
-      <Button
+      <Button disabled={!formik.values.bank_Acct_Number || !formik.values.bank_Name}
         color="primary"
         style={{ height: "18px" }}
         variant="contained"
@@ -514,8 +518,11 @@ const DashBoard = () => {
             {body2}
           </Modal>
           <div>
-            <MediumTextLignt>
+          <MediumTextLignt style={{backgroundColor:'#FF00FF',color:'#fff',padding:'1px',borderRadius:'10px',textAlign:'center'}}>
               {userdata.fullName} - ({userdata.Email})
+            </MediumTextLignt>
+            <MediumTextLignt>
+              phone: {userdata.mobile && userdata.mobile}
             </MediumTextLignt>
             <MediumTextLignt>
               My Referral Code- <b>{userdata.referralCode}</b>
@@ -539,9 +546,9 @@ userdata.downLiners */}
           <BigText>Dashboard</BigText>
         </DashboardHeader>
         <GiftHeader>
-          <div>
-            <MediumTextLignt>
-              <b>My Details</b>
+          <div style={{maxWidth:'300px'}}>
+          <MediumTextLignt style={{backgroundColor:'#FF00FF',color:'#fff',padding:'2px',borderRadius:'10px',textAlign:'center',maxWidth:'100px'}}>
+              <b> My Details</b>
             </MediumTextLignt>
             <MediumTextLignt>Bank Name - {userdata.bank_Name}</MediumTextLignt>
             <MediumTextLignt>
@@ -567,18 +574,24 @@ userdata.downLiners */}
             </Button>
           </div>
           <div>
-            <MediumTextLignt>
-              <b> Send Gift</b>
+            <MediumTextLignt style={{backgroundColor:'orange',color:'#fff',padding:'2px',borderRadius:'10px',textAlign:'center'}}>
+              <b> Send Gift To</b>
             </MediumTextLignt>
             <MediumTextLignt>
-              Gifted member to be paid by me --{" "}
+              Bank Name  -- <b>{userdata.pay_to_BankName}</b>
+            </MediumTextLignt>
+            <MediumTextLignt>
+              Account Name --{" "}
               <b>{userdata.pay_to_BankUserName}</b>
             </MediumTextLignt>
             <MediumTextLignt>
-              Bank Name to be paid by me -- <b>{userdata.pay_to_BankName}</b>
+              Account Number- <b>{userdata.pay_to_BankNumber}</b>
             </MediumTextLignt>
             <MediumTextLignt>
-              Account to send gift to- <b>{userdata.pay_to_BankNumber}</b>
+              Phone Number- <b>{userdata.pay_to__mobile}</b>
+            </MediumTextLignt>
+            <MediumTextLignt>
+              Amount- <b>NGN 50,000</b>
             </MediumTextLignt>
             <MediumTextLignt>
               Payment Status--
@@ -592,14 +605,14 @@ userdata.downLiners */}
             </MediumTextLignt>
             <Button
               color="primary"
-              style={{ height: "18px" }}
+              style={{ minHeight: "18px" }}
               variant="contained"
               onClick={handleOpenUpload}
               disabled={
                 !userdata.pay_to_BankNumber || userdata.paymentConfirmed
               }
             >
-              <small style={{ fontSize: 10 }}> Upload Payment Evidence</small>
+              <small style={{ fontSize: 9 }}> Upload Payment Evidence</small>
             </Button>
           </div>
         </GiftHeader>

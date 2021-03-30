@@ -16,7 +16,8 @@ const Margin = styled.div`
   height: 80px;
 `;
 
-const ProxyUrl = "https://tranquil-headland-58367.herokuapp.com";
+// const ProxyUrl = "https://tranquil-headland-58367.herokuapp.com";
+const ProxyUrl = process.env.REACT_APP_API_URL
 // const ProxyUrl = "http://localhost:8080";
 const axios = require("axios").default;
 
@@ -60,6 +61,7 @@ const Authentication = () => {
       fullName: "",
       Email: "",
       Password: "",
+      mobile: "",
       confirmPassword: "",
       referrerCode: "",
     },
@@ -361,6 +363,24 @@ const Authentication = () => {
                                   placeholder="Confirm Password *"
                                   required
                                   value={formik.values.confirmPassword}
+                                  onChange={formik.handleChange}
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          <div className="col-sm-12 col-md-12 col-lg-12">
+                            <div className="form-group mb-15">
+                              <div className="input-group">
+                                <div className="input-group-prepend"></div>
+                                <input
+                                  maxLength="10"
+                                  id="mobile"
+                                  name="mobile"
+                                  label="mobile"
+                                  type="number"
+                                  className="form-control"
+                                  placeholder="Mobile Phone *"
+                                  value={formik.values.mobile}
                                   onChange={formik.handleChange}
                                 />
                               </div>

@@ -117,13 +117,14 @@ const Authentication = (props) => {
     },
     validationSchema: null, // we passs yup validation object created here
     onSubmit: async (values) => {
+      const realValues={...values,Email:String(values.Email).toLowerCase()}
       console.log(values);
       // if (formik.errors) {
       //   return console.log(formik.errors);
       // }
       setLoadingsignup(true);
       await axios
-        .post(`${ProxyUrl}/users/register`, values)
+        .post(`${ProxyUrl}/users/register`, realValues)
         .then(function (response) {
           console.log(response);
           setLoadingsignup(false);
@@ -153,13 +154,15 @@ const Authentication = (props) => {
     },
     validationSchema: null, // we passs yup validation object created here
     onSubmit: async (values) => {
+const realValues={Email:String(values.Email).toLowerCase(),Password:values.Password}
+
       setLoadinglogin(true);
       await axios
         .post(
           `${ProxyUrl}/users/login`,
           // "https://tranquil-headland-58367.herokuapp.com/users/login",
 
-          values
+          realValues
         )
         .then(function (response) {
           console.log(response.data);
@@ -199,7 +202,7 @@ const Authentication = (props) => {
   await axios
         .post(
           `${ProxyUrl}/users/PreRegister`,
-          {email:provideEmail}
+          {email: String(provideEmail).toLowerCase()}
         )
         .then(function (response) {
           console.log(response.data);

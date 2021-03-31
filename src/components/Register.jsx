@@ -84,9 +84,10 @@ history.location.state&&setVerifiedEmail(history.location.state.email)
       // if (formik.errors) {
       //   return console.log(formik.errors);
       // }
+      const realValues={...values,Email:String(values.Email).toLowerCase()}
       setLoadingsignup(true);
       await axios
-        .post(`${ProxyUrl}/users/register`, values)
+        .post(`${ProxyUrl}/users/register`, realValues)
         .then(function (response) {
           console.log(response);
           setLoadingsignup(false);

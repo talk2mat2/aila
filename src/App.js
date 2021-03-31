@@ -7,6 +7,7 @@ import {
   Route,
   Link,
   useHistory,
+  useParams
 } from "react-router-dom";
 
 import Index from "./components";
@@ -21,8 +22,14 @@ import Privacypolicy from "./components/privacy-policy";
 import TermsAndCondition from "./components/terms-conditions";
 import Features from "./components/features";
 import { LOGINOUTUSER } from "./redux/action";
+import VeriFyEmail from "./components/VeriFyEmail";
+import Register from "./components/Register";
+import './style.css'
+import './responsive.css'
 
-function App() {
+
+
+function App(props) {
   const dispatch = useDispatch();
 
   const LogOut = () => {
@@ -38,6 +45,17 @@ function App() {
   useEffect(() => {
     CurrentUser && SelfDestructT(userdata);
   }, [userdata]);
+
+
+
+const history= useHistory()
+  useEffect(()=>{
+    console.log(history)
+    if(history.location.pathname==="/users/verifyEmail/"){
+      console.log('verifyingf')
+    }
+    // === "/confirm/:confirmationCode"
+  })
 
   const SelfDestructT = (user) => {
     console.log(user);
@@ -57,7 +75,7 @@ function App() {
   };
 
   return (
-    <Router>
+ 
       <React.Fragment>
         <Switch>
           <Route exact path="/">
@@ -67,9 +85,16 @@ function App() {
           <Route exact path="/terms">
             <TermsAndCondition />
           </Route>
-          <Route exact path="/users">
-            <Authentication />
+          <Route  path="/users" component={Authentication}/>
+            {/* <Authentication />
+          </Route> */}
+          <Route  path="/verifyEmail">
+          <VeriFyEmail/>
           </Route>
+          <Route  path="/register">
+          <Register/>
+          </Route>
+
           {CurrentUser && (
             <Route exact path="/MyDashBoard">
               <DashBoard />
@@ -109,7 +134,7 @@ function App() {
           {/* <Faqs /> */}
         </Switch>
       </React.Fragment>
-    </Router>
+   
   );
 }
 

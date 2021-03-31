@@ -29,6 +29,9 @@ const DashboardHeader = styled.div`
   min-height: 100px;
   width: 98%;
   background-color: #ffff;
+  background-image: linear-gradient(to right,#fdfcfb , #e2d1c3);
+
+  // background-image: linear-gradient(to-right,#fdfbfb , #ebedee);
   padding: 10px;
   display: flex;
   flex-direction: row;
@@ -39,6 +42,7 @@ const RefferHeader = styled.div`
   height: 80px;
   margin-top: 10px;
   width: 98%;
+  background-image: linear-gradient(to right,#fdfcfb , #e2d1c3);
   background-color: #ffff;
   padding: 10px;
   display: flex;
@@ -52,6 +56,7 @@ const GiftHeader = styled.div`
   width: 98%;
   background-color: #ffff;
   padding: 10px;
+  background-image: linear-gradient(to right,#fdfcfb , #e2d1c3);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -63,6 +68,7 @@ const ReferralContainer = styled.div`
   width: 98%;
   flex-wrap: wrap;
   padding: 10px;
+  background-image: linear-gradient(to right,#fdfcfb , #e2d1c3);
   background-color: white;
   margin: 10px;
   margin-top: 0px;
@@ -517,12 +523,15 @@ const DashBoard = () => {
           >
             {body2}
           </Modal>
-          <div>
-          <MediumTextLignt style={{backgroundColor:'#FF00FF',color:'#fff',padding:'1px',borderRadius:'10px',textAlign:'center'}}>
-              {userdata.fullName} - ({userdata.Email})
+          <div style={{maxWidth:'250px'}}>
+          <MediumTextLignt style={{backgroundColor:'tomato',color:'#fff',padding:'0.5px',borderRadius:'4px',textAlign:'center'}}>
+              {userdata.fullName}
             </MediumTextLignt>
             <MediumTextLignt>
-              phone: {userdata.mobile && userdata.mobile}
+            Email: {userdata.Email && userdata.Email}
+            </MediumTextLignt>
+            <MediumTextLignt>
+              Phone: {userdata.mobile && userdata.mobile}
             </MediumTextLignt>
             <MediumTextLignt>
               My Referral Code- <b>{userdata.referralCode}</b>
@@ -546,8 +555,8 @@ userdata.downLiners */}
           <BigText>Dashboard</BigText>
         </DashboardHeader>
         <GiftHeader>
-          <div style={{maxWidth:'300px'}}>
-          <MediumTextLignt style={{backgroundColor:'#FF00FF',color:'#fff',padding:'2px',borderRadius:'10px',textAlign:'center',maxWidth:'100px'}}>
+          <div style={{maxWidth:'300px',marginRight:'50px'}}>
+          <MediumTextLignt style={{backgroundColor:'orange',color:'#fff',padding:'2px',borderRadius:'4px',textAlign:'center',maxWidth:'100px'}}>
               <b> My Details</b>
             </MediumTextLignt>
             <MediumTextLignt>Bank Name - {userdata.bank_Name}</MediumTextLignt>
@@ -573,8 +582,8 @@ userdata.downLiners */}
               <small style={{ fontSize: 10 }}> update</small>
             </Button>
           </div>
-          <div>
-            <MediumTextLignt style={{backgroundColor:'orange',color:'#fff',padding:'2px',borderRadius:'10px',textAlign:'center'}}>
+          <div style={{width:'250px'}}>
+            <MediumTextLignt style={{backgroundColor:'orange',color:'#fff',padding:'2px',borderRadius:'4px',textAlign:'center'}}>
               <b> Send Gift To</b>
             </MediumTextLignt>
             <MediumTextLignt>

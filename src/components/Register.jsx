@@ -288,7 +288,16 @@ history.location.state&&setVerifiedEmail(history.location.state.email)
                                   id="mobile"
                                   name="mobile"
                                   label="mobile"
-                                  type="number"
+                                  type="text"
+                                  onInput={(e) => {
+                                    // e.target.value = e.target.value
+                                    //   .toString()
+                                    //   .slice(0, 13);
+                                    if(!/^[0-9,+]+$/.test(e.target.value)){
+                                      return e.target.value=null
+                                     }
+                                 
+                                  }}
                                   className="form-control"
                                   placeholder="Phone Number*"
                                   value={formik.values.mobile}

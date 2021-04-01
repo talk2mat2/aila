@@ -13,6 +13,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { SYNCUSERDATA } from "../redux/action";
 
 import TextField from "@material-ui/core/TextField";
+import { DriveEta } from "@material-ui/icons";
 
 // const ProxyUrl = "https://tranquil-headland-58367.herokuapp.com";
 const ProxyUrl = process.env.REACT_APP_API_URL
@@ -84,6 +85,10 @@ const MediumText = styled.p`
   font-size: 14px;
   font-weight: 700;
 `;
+
+const Div=styled.div`
+background-image: linear-gradient(to right,#fdfcfb , #e2d1c3);
+`
 const MediumTextLignt = styled.p`
   color: grey;
   font-size: 14px;
@@ -324,8 +329,12 @@ const DashBoard = () => {
     },
     validationSchema: null,
     onSubmit: (values) => {
-      setUpdateLoading(true);
+  
 
+if(!/^[0-9]+$/.test(formik.values.bank_Acct_Number)){
+ return alert(`please enter a valid account number,${formik.values.bank_Acct_Number} is invalid`)
+}   
+ setUpdateLoading(true);
       axios
         .post(
           ` ${ProxyUrl}/users/UpdateMyAcctNumber`,
@@ -401,9 +410,9 @@ const DashBoard = () => {
         });
     }
   };
-
+  const CHARACTER_LIMIT = 20;
   const body = (
-    <div style={{ ...modalStyle, ...ModalStyle }}>
+    <Div style={{ ...modalStyle, ...ModalStyle }}>
       <MediumTextLignt>Update Bank Account </MediumTextLignt>
       <div style={{ width: "60%", textAlign: "center" }}>
         <TextField
@@ -417,13 +426,22 @@ const DashBoard = () => {
           onSubmit={formik.handleSubmit}
         />
         <TextField
+          
           defaultValue={userdata.bank_Acct_Number}
-          type="number"
+         type='text'
           onInput={(e) => {
-            e.target.value = Math.max(0, parseInt(e.target.value))
-              .toString()
-              .slice(0, 12);
+            // e.target.value = e.target.value
+            //   .toString()
+            //   .slice(0, 13);
+            if(!/^[0-9]+$/.test(e.target.value)){
+              return e.target.value=null
+             }
+         
           }}
+          inputProps={{
+            maxLength: 12
+          }}
+          
           label="Account Number"
           id="bank_Acct_Number"
           name="bank_Acct_Number"
@@ -449,7 +467,7 @@ const DashBoard = () => {
           <small> update</small>
         )}
       </Button>
-    </div>
+    </Div>
   );
   const body2 = (
     <div style={{ ...modalStyle, ...ModalStyle }}>

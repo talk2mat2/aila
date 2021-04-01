@@ -15,6 +15,7 @@ import * as Yup from "yup";
 // import NavBar from "./navbar";
 import styled from "styled-components";
 import Register from "./Register";
+import NavBar from "./navbar";
 
 const Margin = styled.div`
   height: 80px;
@@ -39,6 +40,8 @@ li{
 	color:grey;
 	margin-top:1.7px;
 	margin-bottom:1.7px;
+
+}
   input{
     margin-right:20px;
     filter: hue-rotate(200deg) ;
@@ -89,7 +92,7 @@ const Authentication = (props) => {
   useEffect(() => {
   
     if (CurrentUser && CurrentUser.token) {
-      history.push("MyDashBoard");
+      // history.push("MyDashBoard");
       // console.log(CurrentUser);
     }
   });
@@ -227,6 +230,7 @@ const realValues={Email:String(values.Email).toLowerCase(),Password:values.Passw
 
   return (
     <div>
+      {/* <NavBar/> */}
       <Margin />
       <div
         className="authentication-section"
@@ -389,11 +393,11 @@ const realValues={Email:String(values.Email).toLowerCase(),Password:values.Passw
                   >
                     <Margin style={{height:'10px'}}/>
 <Listing>
-  <li><input onChange={()=>{setcheck1(!check1)}}  type="checkbox" checked={check1}></input>i have read and understood how IFF works</li>
-  <li> <input onChange={()=>{setcheck2(!check2)}}  type="checkbox" checked={check2}></input>i have a full knowloedge that there is no refund</li>
-  <li> <input onChange={()=>{setcheck3(!check3)}}  type="checkbox" checked={check3}></input>i have a full knowloedge that there is no refund<br/> i agree to this in all totality</li>
-  <li> <input onChange={()=>{setcheck4(!check4)}}  type="checkbox" checked={check4}></input>i know that i must register my 2 members who has the capacity to register theirs as well</li>
-  <li> <input onChange={()=>{setcheck5(!check5)}}  type="checkbox" checked={check5}></input>i fully agree to join and take part in IFF process, i promise to set the process as set by IFF</li>
+  <li><input onChange={()=>{setcheck1(!check1)}}  type="checkbox" checked={check1}></input>I have read and understood how IFF works</li>
+  <li> <input onChange={()=>{setcheck2(!check2)}}  type="checkbox" checked={check2}></input>I have a full knowloedge that there is no refund</li>
+  <li> <input onChange={()=>{setcheck3(!check3)}}  type="checkbox" checked={check3}></input>I have a full knowloedge that there is no refund<br/>, i agree to this in all totality</li>
+  <li> <input onChange={()=>{setcheck4(!check4)}}  type="checkbox" checked={check4}></input>I know that i must register my 2 members who has the capacity to register theirs as well</li>
+  <li> <input onChange={()=>{setcheck5(!check5)}}  type="checkbox" checked={check5}></input>I fully agree to join and take part in IFF process, i promise to follow the process as set by IFF</li>
 </Listing>
 
                   <Margin style={{height:'10px'}}/>

@@ -24,7 +24,7 @@ const NavBar = () => {
       <div className="navbar-area">
         <div className="mobile-nav">
           <Link className="logo" to="/">
-            <img src="assets/images/logo.png" alt="logo" />
+            {/* <img src="assets/images/logo.png" alt="logo" /> */}
           </Link>
           <div className="navbar-option">
             <div className="navbar-option-item dropdown nav-language-option"></div>
@@ -35,7 +35,7 @@ const NavBar = () => {
           <div className="container-fluid">
             <nav className="navbar navbar-expand-md navbar-light">
               <Link className="navbar-brand" to="/">
-                <img src="assets/images/logo.png" alt="logo" />
+                <img src="/assets/images/logo.png" alt="logo" />
               </Link>
               <div
                 className="collapse navbar-collapse mean-menu"

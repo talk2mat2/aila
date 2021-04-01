@@ -5,7 +5,7 @@ import NavBar from "./navbar";
 const Aboutus = () => {
   return (
     <div>
-      <NavBar />
+      {/* <NavBar /> */}
       <section className="video-section pt-100 pb-70">
         <div className="container">
           <div className="home-facility-content">

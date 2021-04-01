@@ -5,7 +5,7 @@ import NavBar from "./navbar";
 const Contactus = () => {
   return (
     <div>
-      <NavBar />
+      {/* <NavBar /> */}
       <header
         className="page-title page-bg"
         style={{

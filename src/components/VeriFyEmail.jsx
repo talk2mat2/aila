@@ -3,6 +3,9 @@ import axios from 'axios'
 import {useHistory} from 'react-router-dom'
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+import NavBar from './navbar';
+import Footer from "./Footer";
+import {Scripts} from './scripts'
 
 const VeriFyEmail = () => {
   
@@ -17,6 +20,16 @@ const history= useHistory()
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
   }
+
+  React.useEffect(() => {
+    const Body =  document.getElementById("root")
+        Scripts.forEach((item) => {
+          const script = document.createElement("script");
+          script.src = item.src;
+          script.async = true;
+         Body.appendChild(script);
+        });
+      }, []);
 const handleClose = () => {
     setAlert({ isError: false, errorMessage: "" });
   };
@@ -52,7 +65,11 @@ const handleClose = () => {
 
 verifyEmail()
     },[])
-    return ( <div style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center'}}>  <Snackbar
+    return ( <>
+    <div style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center'}}>
+ <NavBar/>
+        
+          <Snackbar
     open={alerts.isError}
     onClose={handleClose}
     autoHideDuration={6000}
@@ -63,27 +80,30 @@ verifyEmail()
     </Alert>
   </Snackbar> 
   <h2 style={{marginTop:'100px'}}>verifying email...</h2><br/><small>you will be redirected to after successfull verification</small>
-  <script src="./authentication_files/jquery-3.5.1.min.js.download"></script>
-      <script src="./authentication_files/bootstrap.bundle.min.js.download"></script>
+ 
+  </div>
 
-      <script src="./authentication_files/jquery.magnific-popup.min.js.download"></script>
+      <script src="./Aila - Online Banking &amp; Payment Processing HTML Template_files/jquery-3.5.1.min.js.download"></script>
+      <script src="./Aila - Online Banking &amp; Payment Processing HTML Template_files/bootstrap.bundle.min.js.download"></script>
 
-      <script src="./authentication_files/owl.carousel.min.js.download"></script>
+      <script src="./Aila - Online Banking &amp; Payment Processing HTML Template_files/jquery.magnific-popup.min.js.download"></script>
 
-      <script src="./authentication_files/jquery.ajaxchimp.min.js.download"></script>
+      <script src="./Aila - Online Banking &amp; Payment Processing HTML Template_files/owl.carousel.min.js.download"></script>
 
-      <script src="./authentication_files/form-validator.min.js.download"></script>
+      <script src="./Aila - Online Banking &amp; Payment Processing HTML Template_files/jquery.ajaxchimp.min.js.download"></script>
 
-      <script src="./authentication_files/contact-form-script.js.download"></script>
+      <script src="./Aila - Online Banking &amp; Payment Processing HTML Template_files/form-validator.min.js.download"></script>
 
-      <script src="./authentication_files/jquery.meanmenu.min.js.download"></script>
+      <script src="./Aila - Online Banking &amp; Payment Processing HTML Template_files/contact-form-script.js.download"></script>
 
-      <script src="./authentication_files/jquery.waypoints.js.download"></script>
+      <script src="./Aila - Online Banking &amp; Payment Processing HTML Template_files/jquery.meanmenu.min.js.download"></script>
 
-      <script src="./authentication_files/counter-up.js.download"></script>
+      <script src="./Aila - Online Banking &amp; Payment Processing HTML Template_files/jquery.waypoints.js.download"></script>
 
-      <script src="./authentication_files/script.js.download"></script>
-  </div>);
+      <script src="./Aila - Online Banking &amp; Payment Processing HTML Template_files/counter-up.js.download"></script>
+
+      <script src="./Aila - Online Banking &amp; Payment Processing HTML Template_files/script.js.download"></script>
+  </>);
 }
  
 export default VeriFyEmail;

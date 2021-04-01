@@ -26,6 +26,20 @@ import VeriFyEmail from "./components/VeriFyEmail";
 import Register from "./components/Register";
 import './style.css'
 import './responsive.css'
+import './cssmedia/css/animate.min.css'
+import './cssmedia/css/bootstrap.min.css'
+import './cssmedia/css/boxicons.min.css'
+//  import './cssmedia/css/flaticon.css'
+import './cssmedia/css/line-awesome.min.css'
+// import './cssmedia/css/magnific-popup.min.css'
+// import './cssmedia/css/meanmenu.min.css'
+import './cssmedia/css/owl.carousel.min.css'
+import './cssmedia/css/owl.theme.default.min.css'
+import NavBar from "./components/navbar";
+
+
+
+
 
 
 
@@ -75,8 +89,8 @@ const history= useHistory()
   };
 
   return (
- 
-      <React.Fragment>
+    <React.Fragment>
+        <NavBar/>
         <Switch>
           <Route exact path="/">
             <Index />
@@ -85,11 +99,11 @@ const history= useHistory()
           <Route exact path="/terms">
             <TermsAndCondition />
           </Route>
-          <Route  path="/users" component={Authentication}/>
+          <Route  path="/users" component={CurrentUser?DashBoard:Authentication}/>
             {/* <Authentication />
           </Route> */}
-          <Route  path="/verifyEmail">
-          <VeriFyEmail/>
+          <Route exact path="/verifyEmail/">
+         <> <VeriFyEmail/></>
           </Route>
           <Route  path="/register">
           <Register/>

@@ -206,7 +206,42 @@ eiusmod cste et dolore magnam aliquam quaerat voluptatem.</p> --> */}
                         src="./Aila - Online Banking &amp; Payment Processing HTML Template_files/check.png"
                         alt="checl"
                       />
-                      No CEO, No commission, Decentralized Payments
+                     No CEO
+                    </div>
+                    <div className="home-about-list-item">
+                      <img
+                        src="./Aila - Online Banking &amp; Payment Processing HTML Template_files/check.png"
+                        alt="checl"
+                      />
+                       No commission for anyone
+                    </div>
+                    <div className="home-about-list-item">
+                      <img
+                        src="./Aila - Online Banking &amp; Payment Processing HTML Template_files/check.png"
+                        alt="checl"
+                      />
+                       No bonus for anyone
+                    </div>
+                    <div className="home-about-list-item">
+                      <img
+                        src="./Aila - Online Banking &amp; Payment Processing HTML Template_files/check.png"
+                        alt="checl"
+                      />
+                       Purely a Decentralized system
+                    </div>
+                    <div className="home-about-list-item">
+                      <img
+                        src="./Aila - Online Banking &amp; Payment Processing HTML Template_files/check.png"
+                        alt="checl"
+                      />
+                       Members Leverage on the each other to raise funds for themselves without goint to get loans
+                    </div>
+                    <div className="home-about-list-item">
+                      <img
+                        src="./Aila - Online Banking &amp; Payment Processing HTML Template_files/check.png"
+                        alt="checl"
+                      />
+     You pay only site maintainance fee
                     </div>
                     <div className="home-about-list-item">
                       <img

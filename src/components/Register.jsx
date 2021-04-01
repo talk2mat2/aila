@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useFormik } from "formik";
 import { LOGINSUCCESS } from "../redux/action";
+import {Scripts } from './scripts'
 
 import * as Yup from "yup";
 // import NavBar from "./navbar";
@@ -35,7 +36,15 @@ const Register = (props) => {
   function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
   }
-
+  useEffect(() => {
+    const Body =  document.getElementById("root")
+        Scripts.forEach((item) => {
+          const script = document.createElement("script");
+          script.src = item.src;
+          script.async = true;
+         Body.appendChild(script);
+        });
+      }, []);
   useEffect(() => {
     if (CurrentUser && CurrentUser.token) {
       history.push("MyDashBoard");
@@ -161,7 +170,7 @@ history.location.state&&setVerifiedEmail(history.location.state.email)
                 className="authentication-user-header"
                 style={{ marginTop: "30px" }}
               >
-                <Link to="/">
+                <Link to="/users">
                   <img src="./authentication_files/logo.png" alt="logo" />
                 </Link>
                 <h1>Welcome to IFF</h1>

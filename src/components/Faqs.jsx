@@ -5,7 +5,7 @@ import NavBar from "./navbar";
 const Faqs = () => {
   return (
     <>
-      <NavBar />
+      {/* <NavBar /> */}
       <header
         class="page-title page-bg"
         style={{

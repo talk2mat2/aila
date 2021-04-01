@@ -521,7 +521,7 @@ if(!/^[0-9]+$/.test(formik.values.bank_Acct_Number)){
 
   return (
     <div>
-      <NavBar />
+      {/* <NavBar /> */}
       <Main>
         <Margin />
         <DashboardHeader>

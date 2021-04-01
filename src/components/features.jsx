@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Features = () => {
   return (
     <div>
-      <NavBar />
+      {/* <NavBar /> */}
       <section className="feature-section p-tb-100 overflow-x-hidden">
         <div className="container">
           <div className="section-title">

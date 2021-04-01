@@ -7,6 +7,7 @@ const Features = () => {
   return (
     <div>
       {/* <NavBar /> */}
+      <div style={{height:'30px'}}></div>
       <section className="feature-section p-tb-100 overflow-x-hidden">
         <div className="container">
           <div className="section-title">

@@ -11,12 +11,12 @@ import axios from "axios";
 import { Formik, useFormik } from "formik";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { SYNCUSERDATA } from "../redux/action";
-
+import { Link } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import { DriveEta } from "@material-ui/icons";
 
 // const ProxyUrl = "https://tranquil-headland-58367.herokuapp.com";
-const ProxyUrl = process.env.REACT_APP_API_URL
+const ProxyUrl = process.env.REACT_APP_API_URL;
 // const ProxyUrl = "http://localhost:8080";
 const Main = styled.div`
   min-height: 95vh;
@@ -30,7 +30,7 @@ const DashboardHeader = styled.div`
   min-height: 100px;
   width: 98%;
   background-color: #ffff;
-  background-image: linear-gradient(to right,#fdfcfb , #e2d1c3);
+  background-image: linear-gradient(to right, #fdfcfb, #e2d1c3);
 
   // background-image: linear-gradient(to-right,#fdfbfb , #ebedee);
   padding: 10px;
@@ -43,7 +43,7 @@ const RefferHeader = styled.div`
   height: 80px;
   margin-top: 10px;
   width: 98%;
-  background-image: linear-gradient(to right,#fdfcfb , #e2d1c3);
+  background-image: linear-gradient(to right, #fdfcfb, #e2d1c3);
   background-color: #ffff;
   padding: 10px;
   display: flex;
@@ -57,7 +57,7 @@ const GiftHeader = styled.div`
   width: 98%;
   background-color: #ffff;
   padding: 10px;
-  background-image: linear-gradient(to right,#fdfcfb , #e2d1c3);
+  background-image: linear-gradient(to right, #fdfcfb, #e2d1c3);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -69,7 +69,7 @@ const ReferralContainer = styled.div`
   width: 98%;
   flex-wrap: wrap;
   padding: 10px;
-  background-image: linear-gradient(to right,#fdfcfb , #e2d1c3);
+  background-image: linear-gradient(to right, #fdfcfb, #e2d1c3);
   background-color: white;
   margin: 10px;
   margin-top: 0px;
@@ -86,9 +86,9 @@ const MediumText = styled.p`
   font-weight: 700;
 `;
 
-const Div=styled.div`
-background-image: linear-gradient(to right,#fdfcfb , #e2d1c3);
-`
+const Div = styled.div`
+  background-image: linear-gradient(to right, #fdfcfb, #e2d1c3);
+`;
 const MediumTextLignt = styled.p`
   color: grey;
   font-size: 14px;
@@ -126,7 +126,7 @@ const ModalStyle = {
 
 const CardsContainer = styled.div`
   width: 200px;
-  height: 160px;
+  min-height: 160px;
   background-color: ${({ color }) => color || "grey"};
   border-radius: 10px;
   margin: 5px;
@@ -153,7 +153,15 @@ const ReferralCards = (props) => {
   );
 };
 const DownlinersCards = (props) => {
-  const { Email, fullName, paymentStatus, _id, evidenImageUri, mobile ,introducedBy} = props.data;
+  const {
+    Email,
+    fullName,
+    paymentStatus,
+    _id,
+    evidenImageUri,
+    mobile,
+    introducedBy,
+  } = props.data;
 
   const openInNewTab = (url) => {
     const newWindow = window.open(url, "_blank", "noopener,noreferrer");
@@ -182,13 +190,13 @@ const DownlinersCards = (props) => {
       <Button
         disabled={paymentStatus}
         color="primary"
-        style={{ height: "18px" }}
+        style={{ height: "20px" }}
         variant="contained"
         onClick={() => {
           props.handleReceived(_id);
         }}
       >
-        <p style={{ fontSize: "10px", color: "white" }}>
+        <p style={{ fontSize: "9px", color: "white" }}>
           {paymentStatus ? "Gift Received" : "confirm received"}
         </p>
       </Button>
@@ -292,8 +300,8 @@ const DashBoard = () => {
   }
 
   function getModalStyle() {
-    const top = 50 
-    const left = 50 
+    const top = 50;
+    const left = 50;
 
     return {
       top: `${top}%`,
@@ -329,12 +337,12 @@ const DashBoard = () => {
     },
     validationSchema: null,
     onSubmit: (values) => {
-  
-
-if(!/^[0-9]+$/.test(formik.values.bank_Acct_Number)){
- return alert(`please enter a valid account number,${formik.values.bank_Acct_Number} is invalid`)
-}   
- setUpdateLoading(true);
+      if (!/^[0-9]+$/.test(formik.values.bank_Acct_Number)) {
+        return alert(
+          `please enter a valid account number,${formik.values.bank_Acct_Number} is invalid`
+        );
+      }
+      setUpdateLoading(true);
       axios
         .post(
           ` ${ProxyUrl}/users/UpdateMyAcctNumber`,
@@ -426,22 +434,19 @@ if(!/^[0-9]+$/.test(formik.values.bank_Acct_Number)){
           onSubmit={formik.handleSubmit}
         />
         <TextField
-          
           defaultValue={userdata.bank_Acct_Number}
-         type='text'
+          type="text"
           onInput={(e) => {
             // e.target.value = e.target.value
             //   .toString()
             //   .slice(0, 13);
-            if(!/^[0-9]+$/.test(e.target.value)){
-              return e.target.value=null
-             }
-         
+            if (!/^[0-9]+$/.test(e.target.value)) {
+              return (e.target.value = null);
+            }
           }}
           inputProps={{
-            maxLength: 12
+            maxLength: 12,
           }}
-          
           label="Account Number"
           id="bank_Acct_Number"
           name="bank_Acct_Number"
@@ -451,7 +456,8 @@ if(!/^[0-9]+$/.test(formik.values.bank_Acct_Number)){
         />
       </div>
 
-      <Button disabled={!formik.values.bank_Acct_Number || !formik.values.bank_Name}
+      <Button
+        disabled={!formik.values.bank_Acct_Number || !formik.values.bank_Name}
         color="primary"
         style={{ height: "18px" }}
         variant="contained"
@@ -541,12 +547,20 @@ if(!/^[0-9]+$/.test(formik.values.bank_Acct_Number)){
           >
             {body2}
           </Modal>
-          <div style={{maxWidth:'250px'}}>
-          <MediumTextLignt style={{backgroundColor:'tomato',color:'#fff',padding:'0.5px',borderRadius:'4px',textAlign:'center'}}>
+          <div style={{ maxWidth: "250px" }}>
+            <MediumTextLignt
+              style={{
+                backgroundColor: "tomato",
+                color: "#fff",
+                padding: "0.5px",
+                borderRadius: "4px",
+                textAlign: "center",
+              }}
+            >
               {userdata.fullName}
             </MediumTextLignt>
             <MediumTextLignt>
-            Email: {userdata.Email && userdata.Email}
+              Email: {userdata.Email && userdata.Email}
             </MediumTextLignt>
             <MediumTextLignt>
               Phone: {userdata.mobile && userdata.mobile}
@@ -568,13 +582,32 @@ userdata.downLiners */}
               {/* water position(gifted)--is if you have brought two people who brough 2
               wind position--is if you bring one position
               fire position is if you have not brought anybody */}
+              {userdata.isAdmin ? (
+                <Link to="/admin">
+                  <BigText
+                    style={{ color: "blue", textDecoration: "underline" }}
+                  >
+                    manage users
+                  </BigText>
+                </Link>
+              ) : null}
             </MediumTextLignt>
           </div>
+
           <BigText>Dashboard</BigText>
         </DashboardHeader>
         <GiftHeader>
-          <div style={{maxWidth:'300px',marginRight:'50px'}}>
-          <MediumTextLignt style={{backgroundColor:'orange',color:'#fff',padding:'2px',borderRadius:'4px',textAlign:'center',maxWidth:'100px'}}>
+          <div style={{ maxWidth: "300px", marginRight: "50px" }}>
+            <MediumTextLignt
+              style={{
+                backgroundColor: "orange",
+                color: "#fff",
+                padding: "2px",
+                borderRadius: "4px",
+                textAlign: "center",
+                maxWidth: "100px",
+              }}
+            >
               <b> My Details</b>
             </MediumTextLignt>
             <MediumTextLignt>Bank Name - {userdata.bank_Name}</MediumTextLignt>
@@ -600,16 +633,23 @@ userdata.downLiners */}
               <small style={{ fontSize: 10 }}> update</small>
             </Button>
           </div>
-          <div style={{width:'250px'}}>
-            <MediumTextLignt style={{backgroundColor:'orange',color:'#fff',padding:'2px',borderRadius:'4px',textAlign:'center'}}>
+          <div style={{ width: "250px" }}>
+            <MediumTextLignt
+              style={{
+                backgroundColor: "orange",
+                color: "#fff",
+                padding: "2px",
+                borderRadius: "4px",
+                textAlign: "center",
+              }}
+            >
               <b> Send Gift To</b>
             </MediumTextLignt>
             <MediumTextLignt>
-              Bank Name  -- <b>{userdata.pay_to_BankName}</b>
+              Bank Name -- <b>{userdata.pay_to_BankName}</b>
             </MediumTextLignt>
             <MediumTextLignt>
-              Account Name --{" "}
-              <b>{userdata.pay_to_BankUserName}</b>
+              Account Name -- <b>{userdata.pay_to_BankUserName}</b>
             </MediumTextLignt>
             <MediumTextLignt>
               Account Number- <b>{userdata.pay_to_BankNumber}</b>

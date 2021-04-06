@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useFormik } from "formik";
 import { LOGINSUCCESS } from "../redux/action";
-import {Scripts } from './scripts'
+import { Scripts } from "./scripts";
 
 import * as Yup from "yup";
 // import NavBar from "./navbar";
@@ -16,7 +16,12 @@ import styled from "styled-components";
 const Margin = styled.div`
   height: 80px;
 `;
-const ProxyUrl = process.env.REACT_APP_API_URL
+const BigText = styled.p`
+  color: grey;
+  font-size: 14px;
+  text-align: center;
+`;
+const ProxyUrl = process.env.REACT_APP_API_URL;
 // const ProxyUrl = "http://localhost:8080";
 const axios = require("axios").default;
 
@@ -24,7 +29,7 @@ const Register = (props) => {
   const [loginfocused, setloginfocused] = useState(false);
   const [loadingsignup, setLoadingsignup] = useState(false);
   const [loadinglogin, setLoadinglogin] = useState(false);
-  const [VerifiedEmail, setVerifiedEmail] = useState('');
+  const [VerifiedEmail, setVerifiedEmail] = useState("");
   const dispatch = useDispatch();
   const history = useHistory();
   const CurrentUser = useSelector((state) => state.user.currentUser);
@@ -37,14 +42,14 @@ const Register = (props) => {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
   }
   useEffect(() => {
-    const Body =  document.getElementById("root")
-        Scripts.forEach((item) => {
-          const script = document.createElement("script");
-          script.src = item.src;
-          script.async = true;
-         Body.appendChild(script);
-        });
-      }, []);
+    const Body = document.getElementById("root");
+    Scripts.forEach((item) => {
+      const script = document.createElement("script");
+      script.src = item.src;
+      script.async = true;
+      Body.appendChild(script);
+    });
+  }, []);
   useEffect(() => {
     if (CurrentUser && CurrentUser.token) {
       history.push("MyDashBoard");
@@ -52,10 +57,9 @@ const Register = (props) => {
     }
   });
   useEffect(() => {
-//  console.log(history.location.state.email)
-history.location.state&&setVerifiedEmail(history.location.state.email)
- 
-  },[]);
+    //  console.log(history.location.state.email)
+    history.location.state && setVerifiedEmail(history.location.state.email);
+  }, []);
   const handleSelect = () => {
     setloginfocused(!loginfocused);
   };
@@ -72,34 +76,40 @@ history.location.state&&setVerifiedEmail(history.location.state.email)
   const formik = useFormik({
     initialValues: {
       fullName: "",
-      Email: history.location.state&&history.location.state.email,
+      Email: history.location.state && history.location.state.email,
       Password: "",
-      mobile:'',
+      mobile: "",
       confirmPassword: "",
       referrerCode: "",
     },
     validationSchema: null, // we passs yup validation object created here
     onSubmit: async (values) => {
-        
-        const{fullName,Email,Password,confirmPassword,mobile}=values
-        if(!fullName||!Email|| !Password|| !confirmPassword || !mobile){
-            return    setAlert({
-                status: "error",
-                isError: true,
-                alertMessage:' pls fill all required fields',
-              });
-        }
+      //   const { fullName, Email, Password, confirmPassword, mobile } = values;
+      const { Email, Password, confirmPassword } = values;
+      if (!Email || !Password || !confirmPassword) {
+        return setAlert({
+          status: "error",
+          isError: true,
+          alertMessage: " pls fill all required fields",
+        });
+      }
       console.log(values);
       // if (formik.errors) {
       //   return console.log(formik.errors);
       // }
-      const realValues={...values,Email:String(values.Email).toLowerCase()}
+      const realValues = {
+        ...values,
+        email: String(values.Email).toLowerCase(),
+      };
       setLoadingsignup(true);
       await axios
         .post(`${ProxyUrl}/users/register`, realValues)
         .then(function (response) {
           console.log(response);
           setLoadingsignup(false);
+          setTimeout(() => {
+            history.push("/users");
+          }, 7000);
           setAlert({
             status: "success",
             isError: true,
@@ -187,9 +197,7 @@ history.location.state&&setVerifiedEmail(history.location.state.email)
               </Snackbar>
               <div className="authentication-user-body">
                 <div className="authentication-tab">
-               
                   <div
-                  
                     className={`authentication-tab-item ${
                       !loginfocused && "authentication-tab-active"
                     }`}
@@ -200,8 +208,6 @@ history.location.state&&setVerifiedEmail(history.location.state.email)
                   </div>
                 </div>
                 <div className="authentication-tab-details">
-                 
-
                   <div
                     className={`authentication-tab-details-item ${
                       !loginfocused && "authentication-tab-details-active"
@@ -212,12 +218,13 @@ history.location.state&&setVerifiedEmail(history.location.state.email)
                     <div className="authentication-form">
                       <form autoComplete="off">
                         <div className="row">
-                          <div className="col-sm-12 col-md-12 col-lg-12">
+                          {/* <div className="col-sm-12 col-md-12 col-lg-12">
                             <div className="form-group mb-15">
                               <div className="input-group">
                                 <div className="input-group-prepend"></div>
                                 <input
                                   maxLength="25"
+                                  autoComplete="off"
                                   id="fullName"
                                   name="fullName"
                                   label="fullName"
@@ -230,33 +237,41 @@ history.location.state&&setVerifiedEmail(history.location.state.email)
                                 />
                               </div>
                             </div>
-                          </div>
+                          </div> */}
 
-                          <div className="col-sm-12 col-md-12 col-lg-12">
+                          {/* <div className="col-sm-12 col-md-12 col-lg-12">
                             <div className="form-group mb-15">
                               <div className="input-group">
                                 <div className="input-group-prepend"></div>
-                                <input disabled
+                                <input
+                                  disabled
                                   id="Email"
+                                  autoComplete="off"
                                   name="Email"
                                   label="Email"
-                                  autoComplete="false"
                                   type="Email"
                                   className="form-control"
                                   placeholder="Email Address *"
                                   required
                                   value={VerifiedEmail}
-                                //   value={formik.values.Email}
+                                  //   value={formik.values.Email}
                                   onChange={formik.handleChange}
                                 />
                               </div>
                             </div>
-                          </div>
+                          </div> */}
+                          <BigText>
+                            {" "}
+                            Hello <b>{VerifiedEmail}</b> <br />
+                            complete your registration to IFF
+                          </BigText>
+
                           <div className="col-sm-12 col-md-12 col-lg-12">
                             <div className="form-group mb-15">
                               <div className="input-group">
                                 <div className="input-group-prepend"></div>
                                 <input
+                                  autoComplete="off"
                                   id="password"
                                   name="Password"
                                   label="Password"
@@ -275,6 +290,7 @@ history.location.state&&setVerifiedEmail(history.location.state.email)
                               <div className="input-group">
                                 <div className="input-group-prepend"></div>
                                 <input
+                                  autoComplete="off"
                                   id="confirmPassword"
                                   name="confirmPassword"
                                   label="Confrim Password"
@@ -288,7 +304,7 @@ history.location.state&&setVerifiedEmail(history.location.state.email)
                               </div>
                             </div>
                           </div>
-                          <div className="col-sm-12 col-md-12 col-lg-12">
+                          {/* <div className="col-sm-12 col-md-12 col-lg-12">
                             <div className="form-group mb-15">
                               <div className="input-group">
                                 <div className="input-group-prepend"></div>
@@ -296,16 +312,16 @@ history.location.state&&setVerifiedEmail(history.location.state.email)
                                   maxLength="20"
                                   id="mobile"
                                   name="mobile"
+                                  autoComplete="off"
                                   label="mobile"
                                   type="text"
                                   onInput={(e) => {
                                     // e.target.value = e.target.value
                                     //   .toString()
                                     //   .slice(0, 13);
-                                    if(!/^[0-9,+]+$/.test(e.target.value)){
-                                      return e.target.value=null
-                                     }
-                                 
+                                    if (!/^[0-9,+]+$/.test(e.target.value)) {
+                                      return (e.target.value = null);
+                                    }
                                   }}
                                   className="form-control"
                                   placeholder="Phone Number*"
@@ -314,12 +330,13 @@ history.location.state&&setVerifiedEmail(history.location.state.email)
                                 />
                               </div>
                             </div>
-                          </div>
+                          </div> */}
                           <div className="col-sm-12 col-md-12 col-lg-12">
                             <div className="form-group mb-15">
                               <div className="input-group">
                                 <div className="input-group-prepend"></div>
                                 <input
+                                  autoComplete="off"
                                   maxLength="10"
                                   id="referrerCode"
                                   name="referrerCode"
@@ -350,7 +367,7 @@ history.location.state&&setVerifiedEmail(history.location.state.email)
                                   style={{ color: "white" }}
                                 />
                               ) : (
-                                "   Sign Up"
+                                "   Complete Sign Up"
                               )}
                             </button>
                           </div>

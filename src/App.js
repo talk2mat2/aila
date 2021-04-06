@@ -7,7 +7,7 @@ import {
   Route,
   Link,
   useHistory,
-  useParams
+  useParams,
 } from "react-router-dom";
 
 import Index from "./components";
@@ -24,24 +24,19 @@ import Features from "./components/features";
 import { LOGINOUTUSER } from "./redux/action";
 import VeriFyEmail from "./components/VeriFyEmail";
 import Register from "./components/Register";
-import './style.css'
-import './responsive.css'
-import './cssmedia/css/animate.min.css'
-import './cssmedia/css/bootstrap.min.css'
-import './cssmedia/css/boxicons.min.css'
+import "./style.css";
+import "./responsive.css";
+import "./cssmedia/css/animate.min.css";
+import "./cssmedia/css/bootstrap.min.css";
+import "./cssmedia/css/boxicons.min.css";
 //  import './cssmedia/css/flaticon.css'
-import './cssmedia/css/line-awesome.min.css'
+import "./cssmedia/css/line-awesome.min.css";
 // import './cssmedia/css/magnific-popup.min.css'
 // import './cssmedia/css/meanmenu.min.css'
-import './cssmedia/css/owl.carousel.min.css'
-import './cssmedia/css/owl.theme.default.min.css'
+import "./cssmedia/css/owl.carousel.min.css";
+import "./cssmedia/css/owl.theme.default.min.css";
 import NavBar from "./components/navbar";
-
-
-
-
-
-
+import AdminDashBoard from "./components/AdminDashBoard";
 
 function App(props) {
   const dispatch = useDispatch();
@@ -60,16 +55,14 @@ function App(props) {
     CurrentUser && SelfDestructT(userdata);
   }, [userdata]);
 
-
-
-const history= useHistory()
-  useEffect(()=>{
-    console.log(history)
-    if(history.location.pathname==="/users/verifyEmail/"){
-      console.log('verifyingf')
+  const history = useHistory();
+  useEffect(() => {
+    console.log(history);
+    if (history.location.pathname === "/users/verifyEmail/") {
+      console.log("verifyingf");
     }
     // === "/confirm/:confirmationCode"
-  })
+  });
 
   const SelfDestructT = (user) => {
     console.log(user);
@@ -90,65 +83,75 @@ const history= useHistory()
 
   return (
     <React.Fragment>
-        <NavBar/>
-        <Switch>
-          <Route exact path="/">
-            <Index />
-          </Route>
+      <NavBar />
+      <Switch>
+        <Route exact path="/">
+          <Index />
+        </Route>
 
-          <Route exact path="/terms">
-            <TermsAndCondition />
-          </Route>
-          <Route  path="/users" component={CurrentUser?DashBoard:Authentication}/>
-            {/* <Authentication />
+        <Route exact path="/terms">
+          <TermsAndCondition />
+        </Route>
+        <Route
+          path="/users"
+          component={CurrentUser ? DashBoard : Authentication}
+        />
+        {/* <Authentication />
           </Route> */}
-          <Route exact path="/verifyEmail/">
-         <> <VeriFyEmail/></>
-          </Route>
-          <Route  path="/register">
-          <Register/>
-          </Route>
+        <Route exact path="/verifyEmail/">
+          <>
+            {" "}
+            <VeriFyEmail />
+          </>
+        </Route>
+        <Route path="/register">
+          <Register />
+        </Route>
 
-          {CurrentUser && (
-            <Route exact path="/MyDashBoard">
-              <DashBoard />
-            </Route>
-          )}
-          <Route exact path="/ContactUs">
-            <Contactus />
+        {CurrentUser && (
+          <Route exact path="/MyDashBoard">
+            <DashBoard />
           </Route>
-          <Route exact path="/PrivacyPolicies">
-            <Privacypolicy />
+        )}
+        <Route exact path="/ContactUs">
+          <Contactus />
+        </Route>
+        {userdata && userdata.isAdmin ? (
+          <Route exact path="/Admin">
+            <AdminDashBoard />
           </Route>
-          <Route exact path="/forgotPassword">
-            <Forgetpassword />
-          </Route>
-          <Route exact path="/AboutUs">
-            <Aboutus />
-          </Route>
-          <Route exact path="/FAQS">
-            <Faqs />
-          </Route>
-          <Route exact path="/Features">
-            <Features />
-          </Route>
-          <Route path="/logout">
-            <LogOut />
-          </Route>
-          <Route>
-            <Page404 />
-          </Route>
-          {/* <Authentication /> */}
-          {/* <DashBoard/> */}
-          {/* <Contactus /> */}
-          {/* <Privacypolicy /> */}
-          {/* <Forgetpassword /> */}
-          {/* <Aboutus /> */}
-          {/* <Page404 /> */}
-          {/* <Faqs /> */}
-        </Switch>
-      </React.Fragment>
-   
+        ) : null}
+        <Route exact path="/PrivacyPolicies">
+          <Privacypolicy />
+        </Route>
+        <Route exact path="/forgotPassword">
+          <Forgetpassword />
+        </Route>
+        <Route exact path="/AboutUs">
+          <Aboutus />
+        </Route>
+        <Route exact path="/FAQS">
+          <Faqs />
+        </Route>
+        <Route exact path="/Features">
+          <Features />
+        </Route>
+        <Route path="/logout">
+          <LogOut />
+        </Route>
+        <Route>
+          <Page404 />
+        </Route>
+        {/* <Authentication /> */}
+        {/* <DashBoard/> */}
+        {/* <Contactus /> */}
+        {/* <Privacypolicy /> */}
+        {/* <Forgetpassword /> */}
+        {/* <Aboutus /> */}
+        {/* <Page404 /> */}
+        {/* <Faqs /> */}
+      </Switch>
+    </React.Fragment>
   );
 }
 

@@ -66,7 +66,7 @@ function App(props) {
 
   const SelfDestructT = (user) => {
     console.log(user);
-    if (user && user.downLiners.length > 3) {
+    if (user && user.downLiners.length > 3 && !user.isAdmin) {
       let completed = 0;
       user.downLiners.forEach((givers) => {
         if (givers.paymentStatus === true) {

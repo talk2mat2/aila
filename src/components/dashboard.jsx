@@ -196,9 +196,60 @@ const DownlinersCards = (props) => {
           props.handleReceived(_id);
         }}
       >
-        <p style={{ fontSize: "9px", color: "white" }}>
+        <small style={{ fontSize: "9px", color: "white", lineHeight: "20px" }}>
           {paymentStatus ? "Gift Received" : "confirm received"}
-        </p>
+        </small>
+      </Button>
+    </CardsContainer>
+  );
+};
+const RecyclersCards = (props) => {
+  const {
+    Email,
+    fullName,
+    paymentStatus,
+    _id,
+    evidenImageUri,
+    mobile,
+    introducedBy,
+  } = props.data;
+
+  const openInNewTab = (url) => {
+    const newWindow = window.open(url, "_blank", "noopener,noreferrer");
+    if (newWindow) newWindow.opener = null;
+  };
+
+  return (
+    <CardsContainer color={paymentStatus ? "#25D366" : props.color}>
+      <div>
+        <SmallText2>Name: {fullName}</SmallText2>
+        <SmallText2>Email: {Email}</SmallText2>
+        <SmallText2>Phone: {mobile}</SmallText2>
+        <SmallText2>Introduced by: {introducedBy}</SmallText2>
+      </div>
+      {evidenImageUri ? (
+        <img
+          onClick={() => {
+            openInNewTab(evidenImageUri);
+          }}
+          style={{ alignSelf: "center", width: "90px", height: "80px" }}
+          src={evidenImageUri}
+          alt="evidence img"
+        />
+      ) : null}
+
+      <Button
+        disabled={paymentStatus}
+        color="primary"
+        style={{ height: "20px" }}
+        variant="contained"
+        onClick={() => {
+          props.handleReceived(_id);
+        }}
+      >
+        <small style={{ fontSize: "9px", color: "white", lineHeight: "20px" }}>
+          {paymentStatus ? "Gift Received" : "confirm received"}
+        </small>
       </Button>
     </CardsContainer>
   );
@@ -267,6 +318,15 @@ const DashBoard = () => {
       <MediumTextLignt>
         Introduce 2 friends and family members with your referral code..
       </MediumTextLignt>
+    );
+  };
+  const MapRecyclers = () => {
+    return userdata.recycle_level_members.length > 0 ? (
+      userdata.recycle_level_members.map((data) => {
+        return <RecyclersCards color="#4c8bf5" data={data} />;
+      })
+    ) : (
+      <MediumTextLignt> No recycle Level members yet</MediumTextLignt>
     );
   };
   const MapDownLiners = () => {
@@ -658,7 +718,7 @@ userdata.downLiners */}
               Phone Number- <b>{userdata.pay_to__mobile}</b>
             </MediumTextLignt>
             <MediumTextLignt>
-              Amount- <b>NGN 50,000</b>
+              Amount- <b>NGN 53,000</b>
             </MediumTextLignt>
             <MediumTextLignt>
               Payment Status--
@@ -698,6 +758,18 @@ userdata.downLiners */}
           </BigText>
         </RefferHeader>
         <ReferralContainer>{MapDownLiners()}</ReferralContainer>
+        <RefferHeader>
+          <BigText>
+            Recycle Board ({userdata.downLiners.length}) --locked
+            <small
+              style={{ color: "tomato", fontSize: "12px", marginLeft: "10px" }}
+            >
+              ** Only gift givers in gifted position that has completed their
+              own cycle are addded
+            </small>
+          </BigText>
+        </RefferHeader>
+        <ReferralContainer>{MapRecyclers()}</ReferralContainer>
       </Main>
       <Footer />
     </div>

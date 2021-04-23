@@ -195,7 +195,7 @@ const Authentication = (props) => {
     },
   });
   const handleVerify = async (e) => {
-    if (!check1 || !check2 || !check3 || !check4 || !check5) {
+    if (!check1 || !check3 || !check4 || !check5) {
       return setAlert({
         status: "error",
         isError: true,
@@ -501,7 +501,7 @@ const Authentication = (props) => {
                               ></input>
                               I have read and understood how IFF works
                             </li>
-                            <li>
+                            {/* <li>
                               {" "}
                               <input
                                 onChange={() => {
@@ -511,7 +511,7 @@ const Authentication = (props) => {
                                 checked={check2}
                               ></input>
                               I have a full knowloedge that there is no refund
-                            </li>
+                            </li> */}
                             <li>
                               {" "}
                               <input
@@ -548,7 +548,7 @@ const Authentication = (props) => {
                               ></input>
                               I fully agree to join and take part in IFF
                               process, i promise to follow the process as set by
-                              IFF
+                              IFF and its recycling process
                             </li>
                           </Listing>
 

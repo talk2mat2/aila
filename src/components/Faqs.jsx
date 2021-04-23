@@ -40,9 +40,18 @@ const Faqs = () => {
                       <h3 className="faq-accordion-title">
                         How does the community make its money?
                       </h3>
+                      <div className="faq-accordion-body-inner">
+                        <p className="faq-accordion-para">
+                          The community does not. Everyone including the admin
+                          goes through the same process. Every pays a site
+                          maintenance fee of only 3k as of now. You gift 53k and
+                          you will be gifted 200k Yes, but each spot is expected
+                          to introduce 2 people before self registration.
+                        </p>
+                      </div>
                       <div className="faq-accordion-header-overlay"></div>
                     </div>
-                    <div className="faq-accordion-body">
+                    {/* <div className="faq-accordion-body">
                       <div className="faq-accordion-body-inner">
                         <p className="faq-accordion-para">
                           In all sincerity, honesty and integrity, the community
@@ -56,7 +65,7 @@ const Faqs = () => {
                           African call Osusu.
                         </p>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                   <div className="faq-accordion-item">
                     <div className="faq-accordion-header">
@@ -66,15 +75,22 @@ const Faqs = () => {
                         how much will I be gifted with?
                       </h3>
                       <div className="faq-accordion-header-overlay"></div>
+                      <div className="faq-accordion-body-inner">
+                        <p className="faq-accordion-para">
+                          You gift a member in the collection position #53,000
+                          only and you will gifted total amount of #200,000 by 4
+                          members when you get to the collection position.
+                        </p>
+                      </div>
                     </div>
                     <div className="faq-accordion-body">
-                      <div className="faq-accordion-body-inner">
+                      {/* <div className="faq-accordion-body-inner">
                         <p className="faq-accordion-para">
                           You gift a member in the collection position #50,000
                           only and you will be gifted #200,000 by 4 members when
                           you get to the collection position.
                         </p>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                   <div className="faq-accordion-item">
@@ -84,8 +100,6 @@ const Faqs = () => {
                         same time?
                       </h3>
                       <div className="faq-accordion-header-overlay"></div>
-                    </div>
-                    <div className="faq-accordion-body">
                       <div className="faq-accordion-body-inner">
                         <p className="faq-accordion-para">
                           Yes, only if you have the capacity to introduce more
@@ -96,6 +110,17 @@ const Faqs = () => {
                         </p>
                       </div>
                     </div>
+                    {/* <div className="faq-accordion-body">
+                      <div className="faq-accordion-body-inner">
+                        <p className="faq-accordion-para">
+                          Yes, only if you have the capacity to introduce more
+                          trusted individuals who has integrity. Note: 1
+                          position requires you introduce 2 individuals while 2
+                          positions requires you to introduce 4 individuals and
+                          so on
+                        </p>
+                      </div>
+                    </div> */}
                   </div>
                   <div className="faq-accordion-item">
                     <div className="faq-accordion-header">
@@ -106,14 +131,20 @@ const Faqs = () => {
                       </h3>
                       <div className="faq-accordion-header-overlay"></div>
                     </div>
+                    <div className="faq-accordion-body-inner">
+                      <p className="faq-accordion-para">
+                        Limitless as long as you have the capacity to introduce
+                        trusted family and friends who has integrity.
+                      </p>
+                    </div>
                     <div className="faq-accordion-body">
-                      <div className="faq-accordion-body-inner">
+                      {/* <div className="faq-accordion-body-inner">
                         <p className="faq-accordion-para">
                           Limitless as long as you have the capacity to
                           introduce trusted family and friends who has
                           integrity.
                         </p>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                   <div className="faq-accordion-item">
@@ -123,8 +154,6 @@ const Faqs = () => {
                         come in?
                       </h3>
                       <div className="faq-accordion-header-overlay"></div>
-                    </div>
-                    <div className="faq-accordion-body">
                       <div className="faq-accordion-body-inner">
                         <p className="faq-accordion-para">
                           You are allowed a maximum of 10 weeks only to
@@ -139,6 +168,21 @@ const Faqs = () => {
                         </p>
                       </div>
                     </div>
+                    <div className="faq-accordion-body">
+                      {/* <div className="faq-accordion-body-inner">
+                        <p className="faq-accordion-para">
+                          You are allowed a maximum of 10 weeks only to
+                          introduce your trusted member else someone else takes
+                          your spot to move the board forward. And there is no
+                          refund. <br />
+                          NOTE: No refund. But you can appeal for a 2 weeks
+                          extension and it might be considered if the members in
+                          the board agree to it. All decisions are from the
+                          members. Admin only ensure adherence to the structure
+                          and prosess.
+                        </p>
+                      </div> */}
+                    </div>
                   </div>
                   <div className="faq-accordion-item">
                     <div className="faq-accordion-header">
@@ -148,13 +192,18 @@ const Faqs = () => {
                         people before forfeiting my money?
                       </h3>
                       <div className="faq-accordion-header-overlay"></div>
-                    </div>
-                    <div className="faq-accordion-body">
                       <div className="faq-accordion-body-inner">
                         <p className="faq-accordion-para">
                           10 to 12 weeks from the registration.{" "}
                         </p>
                       </div>
+                    </div>
+                    <div className="faq-accordion-body">
+                      {/* <div className="faq-accordion-body-inner">
+                        <p className="faq-accordion-para">
+                          10 to 12 weeks from the registration.{" "}
+                        </p>
+                      </div> */}
                     </div>
                   </div>
                   <div className="faq-accordion-item">
@@ -164,9 +213,17 @@ const Faqs = () => {
                         What if my 2 people refuse to bring in their 2 people?
                       </h3>
                       <div className="faq-accordion-header-overlay"></div>
+                      <div className="faq-accordion-body-inner">
+                        <p className="faq-accordion-para">
+                          If they are unable to introduce their own 2 members,
+                          the flow will be halted for that group. So the group
+                          leaders will ensure everyone works together to prevent
+                          halting for more than necessary.
+                        </p>
+                      </div>
                     </div>
                     <div className="faq-accordion-body">
-                      <div className="faq-accordion-body-inner">
+                      {/* <div className="faq-accordion-body-inner">
                         <p className="faq-accordion-para">
                           This will stall the board and they have 10 to 12 weeks
                           before they are replaced member. The board has to move
@@ -174,7 +231,7 @@ const Faqs = () => {
                           <br />
                           NOTE: No refund
                         </p>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                   <div className="faq-accordion-item">
@@ -183,8 +240,6 @@ const Faqs = () => {
                         How long has the company been in existence?
                       </h3>
                       <div className="faq-accordion-header-overlay"></div>
-                    </div>
-                    <div className="faq-accordion-body">
                       <div className="faq-accordion-body-inner">
                         <p className="faq-accordion-para">
                           First of all, it's not a company. It's a plain level
@@ -197,6 +252,19 @@ const Faqs = () => {
                         </p>
                       </div>
                     </div>
+                    <div className="faq-accordion-body">
+                      {/* <div className="faq-accordion-body-inner">
+                        <p className="faq-accordion-para">
+                          First of all, it's not a company. It's a plain level
+                          transparent platform for forward thinking individuals
+                          coming together to gift members and in turn be gifted.{" "}
+                          <br />
+                          It's been in existence since 2009 in the United
+                          States, United Kingdom, Canada, Australia, Europe and
+                          Africa in various forms.
+                        </p>
+                      </div> */}
+                    </div>
                   </div>
                   <div className="faq-accordion-item">
                     <div className="faq-accordion-header">
@@ -205,8 +273,6 @@ const Faqs = () => {
                         What is the name of the owner of the company?
                       </h3>
                       <div className="faq-accordion-header-overlay"></div>
-                    </div>
-                    <div className="faq-accordion-body">
                       <div className="faq-accordion-body-inner">
                         <p className="faq-accordion-para">
                           There's no owner, no CEO, no central account, no
@@ -215,6 +281,16 @@ const Faqs = () => {
                           compliance with the structure and processes.{" "}
                         </p>
                       </div>
+                    </div>
+                    <div className="faq-accordion-body">
+                      {/* <div className="faq-accordion-body-inner">
+                        <p className="faq-accordion-para">
+                          There's no owner, no CEO, no central account, no
+                          interference with funds or payments in anyway. <br />
+                          There's only the Admin who rollout boards and ensure
+                          compliance with the structure and processes.{" "}
+                        </p>
+                      </div> */}
                     </div>
                   </div>
                   <div className="faq-accordion-item">
@@ -225,15 +301,23 @@ const Faqs = () => {
                         bodies?
                       </h3>
                       <div className="faq-accordion-header-overlay"></div>
+                      <div className="faq-accordion-body-inner">
+                        <p className="faq-accordion-para">
+                          It's not a company and its not registered with any
+                          government bodies. Its a gifting platform for only
+                          interested individuals who has the capacity to run
+                          through the process.
+                        </p>
+                      </div>
                     </div>
                     <div className="faq-accordion-body">
-                      <div className="faq-accordion-body-inner">
+                      {/* <div className="faq-accordion-body-inner">
                         <p className="faq-accordion-para">
                           No. It's not a company in the first place. It's not
                           for the public or random individuals. <br />
                           It only for family and friends with integrity.{" "}
                         </p>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>

@@ -206,42 +206,43 @@ eiusmod cste et dolore magnam aliquam quaerat voluptatem.</p> --> */}
                         src="./Aila - Online Banking &amp; Payment Processing HTML Template_files/check.png"
                         alt="checl"
                       />
-                     No CEO
+                      No CEO
                     </div>
                     <div className="home-about-list-item">
                       <img
                         src="./Aila - Online Banking &amp; Payment Processing HTML Template_files/check.png"
                         alt="checl"
                       />
-                       No commission for anyone
+                      No commission for anyone
                     </div>
                     <div className="home-about-list-item">
                       <img
                         src="./Aila - Online Banking &amp; Payment Processing HTML Template_files/check.png"
                         alt="checl"
                       />
-                       No bonus for anyone
+                      No bonus for anyone
                     </div>
                     <div className="home-about-list-item">
                       <img
                         src="./Aila - Online Banking &amp; Payment Processing HTML Template_files/check.png"
                         alt="checl"
                       />
-                       Purely a Decentralized system
+                      Purely a Decentralized system
                     </div>
                     <div className="home-about-list-item">
                       <img
                         src="./Aila - Online Banking &amp; Payment Processing HTML Template_files/check.png"
                         alt="checl"
                       />
-                       Members Leverage on the each other to raise funds for themselves without goint to get loans
+                      Members Leverage on the each other to raise funds for
+                      themselves without goint to get loans
                     </div>
                     <div className="home-about-list-item">
                       <img
                         src="./Aila - Online Banking &amp; Payment Processing HTML Template_files/check.png"
                         alt="checl"
                       />
-     You pay only site maintainance fee
+                      You pay only site maintainance fee
                     </div>
                     <div className="home-about-list-item">
                       <img
@@ -713,7 +714,7 @@ eiusmod cste et dolore magnam aliquam quaerat voluptatem.</p> --> */}
                           className="download-feature-item-inner"
                           style={{ textAlign: "center" }}
                         >
-                          <h3>N50,000</h3>
+                          <h3>N53,000</h3>
                           <p>
                             Gift a Member in The collection Position N50,000
                           </p>

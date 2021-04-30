@@ -11,6 +11,7 @@ import UsersPage from "./users";
 import RequestReg from "./RequestReg";
 import DeleteUser from "./DeleteUsers";
 import ApprovedUsers from "./Approved";
+import RecyclePayments from "./recyclePayments";
 
 const Container = styled.div``;
 const Main = styled.div`
@@ -92,6 +93,11 @@ const AdminDashBoard = () => {
             <Tab value="two" label="Register Request" {...a11yProps("two")} />
             <Tab value="three" label="delete User" {...a11yProps("three")} />
             <Tab value="four" label="Approved users" {...a11yProps("four")} />
+            <Tab
+              value="five"
+              label="Recycle Board Payments"
+              {...a11yProps("five")}
+            />
           </Tabs>
         </AppBar>
         <TabPanel value={value} index="one">
@@ -105,6 +111,9 @@ const AdminDashBoard = () => {
         </TabPanel>
         <TabPanel value={value} index="four">
           <ApprovedUsers />
+        </TabPanel>
+        <TabPanel value={value} index="five">
+          <RecyclePayments />
         </TabPanel>
       </Main>
     </Container>

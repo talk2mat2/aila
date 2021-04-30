@@ -207,7 +207,7 @@ const RecyclersCards = (props) => {
   const {
     Email,
     fullName,
-    paymentStatus,
+    paymentStatus_recycle,
     _id,
     evidenImageUri,
     mobile,
@@ -220,7 +220,7 @@ const RecyclersCards = (props) => {
   };
 
   return (
-    <CardsContainer color={paymentStatus ? "#25D366" : props.color}>
+    <CardsContainer color={paymentStatus_recycle ? "#25D366" : props.color}>
       <div>
         <SmallText2>Name: {fullName}</SmallText2>
         <SmallText2>Email: {Email}</SmallText2>
@@ -239,16 +239,16 @@ const RecyclersCards = (props) => {
       ) : null}
 
       <Button
-        disabled={paymentStatus}
+        disabled={paymentStatus_recycle}
         color="primary"
         style={{ height: "20px" }}
         variant="contained"
         onClick={() => {
-          props.handleReceived(_id);
+          props.ConfirmRecyclePaymentReceived(_id);
         }}
       >
         <small style={{ fontSize: "9px", color: "white", lineHeight: "20px" }}>
-          {paymentStatus ? "Gift Received" : "confirm received"}
+          {paymentStatus_recycle ? "Gift Received" : "confirm received"}
         </small>
       </Button>
     </CardsContainer>
@@ -280,6 +280,17 @@ const DashBoard = () => {
     axios
       .post(
         `${ProxyUrl}/users/ConfirmPaymentReceived`,
+        { payerId: payerId },
+        { headers: { authorization: token } }
+      )
+      .then((res) => {
+        dispatch(SYNCUSERDATA(res.data.userdata));
+      });
+  };
+  const ConfirmRecyclePaymentReceived = (payerId) => {
+    axios
+      .post(
+        `${ProxyUrl}/users/ConfirmRecyclePaymentReceived`,
         { payerId: payerId },
         { headers: { authorization: token } }
       )
@@ -320,13 +331,27 @@ const DashBoard = () => {
       </MediumTextLignt>
     );
   };
+  //we remove the first person from the array since he is to pay for the recycle
+  const popedArray = (arr) => {
+    arr.shift();
+    return arr;
+  };
   const MapRecyclers = () => {
-    return userdata.recycle_level_members.length > 0 ? (
-      userdata.recycle_level_members.map((data) => {
-        return <RecyclersCards color="#4c8bf5" data={data} />;
+    return userdata.recycle_level_members.length > 1 &&
+      userdata.recycle_level_members[0].paymentStatus_recycle === true ? (
+      popedArray(userdata.recycle_level_members).map((data) => {
+        return (
+          <RecyclersCards
+            ConfirmRecyclePaymentReceived={ConfirmRecyclePaymentReceived}
+            color="#4c8bf5"
+            data={data}
+          />
+        );
       })
     ) : (
-      <MediumTextLignt> No recycle Level members yet</MediumTextLignt>
+      <MediumTextLignt>
+        No recycle Level members yet or level is locked
+      </MediumTextLignt>
     );
   };
   const MapDownLiners = () => {
@@ -736,7 +761,8 @@ userdata.downLiners */}
               variant="contained"
               onClick={handleOpenUpload}
               disabled={
-                !userdata.pay_to_BankNumber || userdata.paymentConfirmed
+                !userdata.pay_to_BankNumber
+                // !userdata.pay_to_BankNumber || userdata.paymentConfirmed
               }
             >
               <small style={{ fontSize: 9 }}> Upload Payment Evidence</small>
@@ -760,12 +786,12 @@ userdata.downLiners */}
         <ReferralContainer>{MapDownLiners()}</ReferralContainer>
         <RefferHeader>
           <BigText>
-            Recycle Board ({userdata.downLiners.length}) --locked
+            Recycle Board ({userdata.recycle_level_members.length})
             <small
               style={{ color: "tomato", fontSize: "12px", marginLeft: "10px" }}
             >
-              ** Only gift givers in gifted position that has completed their
-              own cycle are addded
+              ** Only three gift givers in gifted position that has completed
+              their own cycle are addded
             </small>
           </BigText>
         </RefferHeader>
